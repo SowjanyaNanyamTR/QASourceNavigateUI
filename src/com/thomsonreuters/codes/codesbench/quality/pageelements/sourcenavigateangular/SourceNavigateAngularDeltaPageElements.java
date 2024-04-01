@@ -18,4 +18,9 @@ public class SourceNavigateAngularDeltaPageElements
 
     @FindBy(how = How.ID, using = "delta-note-text-area")
     public static WebElement deltaLevelinstructions;
+
+    public static final String DELTA_PROPERTIES_HEADER = "//div[@class='modal-header modal-header-override']";
+    public static final String DELTA_CANCEL_BUTTON = "//button[text()='Cancel']";
+    public static final String DELTA_SUBMIT_BUTTON = "//button[contains(text(),' Submit ')]";
+    public static final String DELTA_CLOSE_BUTTON = "//button[@class='close-btn']";
 }

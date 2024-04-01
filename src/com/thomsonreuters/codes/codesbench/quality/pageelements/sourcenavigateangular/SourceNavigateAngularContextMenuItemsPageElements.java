@@ -32,7 +32,7 @@ public class SourceNavigateAngularContextMenuItemsPageElements
     public static final String RENDITION_BASELINE = "//span[text()='Rendition Baselines']";
 
     // *** Rendition ***
-    public static final String RENDITION = "//span[text()='Rendition']";
+    public static final String RENDITION = "//span[text()='Rendition' or text()=' Rendition ']";
 
     // *** Create Preparation Document ***
     public static final String CREATE_PREPARATION_DOCUMENT = "//span[text()='Create Preparation Document']";
@@ -97,4 +97,5 @@ public class SourceNavigateAngularContextMenuItemsPageElements
     public static final String GENERAL_EFFECTIVE_DATE_TOGGLE_BUTTON = "(//div[contains(@class, 'bento-toggle-nob')])[2]";
     public static final String  RUN_CITE_LOCATE_INTEGRATION_STATUS_TOGGLE_BUTTON = "(//bento-toggle[contains(@role,switch)])[3]";
     public static final String  TOOL_BAR_MORE_OPTION = "//div[@class='dropdown']//button[@class='dropdown-toggle btn-toolbar']";
+    public static final String DELTA_PROPERTIES = "//span[text()='Delta Properties']";
 }
