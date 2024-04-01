@@ -18,6 +18,7 @@ public class SourceNavigateAngularSectionPageElements
     public static final String SECTION_LOCKED_BY ="//p[contains(text(),' This Section is currently locked by ')]";
     public static final String VIEW_SECTION_INSTRUCTION_NOTES = "View Section Instruction Notes";
     public static final String NOTES_VALUE_OF_SECTION = "(//button[@class='grid-btn'])[2]";
+    public static final String SECTION_PROPERTIES = "//span[text()='Section Properties']";
 
     @FindBy(how = How.ID, using = "sect-note-text-area")
     public static WebElement sectionLevelinstructions;

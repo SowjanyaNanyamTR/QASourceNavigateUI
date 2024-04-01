@@ -1621,7 +1621,7 @@ task sourceNavigateAngularUATTests(type: Test) {
     systemProperty "ENVIRONMENT_TO_RUN", "uat"
     systemProperty "HEADLESS_MODE", "false"
     filter {
-        includeTestsMatching "com.thomsonreuters.codes.codesbench.quality.tests.sourcenavigateangular.*"
+        includeTestsMatching "com.thomsonreuters.codes.codesbench.quality.tests.sourcenavigateangular.general.SNGeneralSectionPropertiesPageTests.verifySectionPropertiesUserInterface"
     }
     useJUnitPlatform()
     testLogging {

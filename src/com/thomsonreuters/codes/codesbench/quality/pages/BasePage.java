@@ -1,9 +1,7 @@
 package com.thomsonreuters.codes.codesbench.quality.pages;
 
 import com.thomsonreuters.codes.codesbench.quality.pageelements.CommonPageElements;
-import com.thomsonreuters.codes.codesbench.quality.pageelements.hierarchy.HierarchyPageElements;
 import com.thomsonreuters.codes.codesbench.quality.pageelements.hierarchy.SetLawTrackingPageElements;
-import com.thomsonreuters.codes.codesbench.quality.pageelements.login.LoginESSOPageElements;
 import com.thomsonreuters.codes.codesbench.quality.pageelements.source.navigate.FiltersAndSortsPageElements;
 import com.thomsonreuters.codes.codesbench.quality.utilities.TestService;
 import com.thomsonreuters.codes.codesbench.quality.utilities.autoIT.AutoITUtils;
@@ -44,7 +42,6 @@ public abstract class BasePage extends TestService
 	public BasePage(WebDriver driver)
 	{
 		this.driver = driver;
-		this.driver = TestService.driver();
 	}
 
 	/*
@@ -54,7 +51,7 @@ public abstract class BasePage extends TestService
 	{
 		//driver.navigate().to(pageUrl); //-- This will not work for WebDriverManager (bonigarcia)
 		driver.get(pageUrl); // -- This is for Edge
-		driver.navigate().refresh();
+		driver().navigate().refresh();
 		waitForPageLoaded();
 
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(DateAndTimeUtils.ONE_MINUTE));
@@ -93,10 +90,6 @@ public abstract class BasePage extends TestService
 
 	public boolean switchToWindow(String wordsInTitle)
 	{
-		if(checkWindowIsPresented(LOGIN_ESSO_PAGE_TITLE))
-		{
-			loginESSOPage().logInESSOWithByPass();
-		}
 		return switchToWindow(wordsInTitle, true);
 	}
 

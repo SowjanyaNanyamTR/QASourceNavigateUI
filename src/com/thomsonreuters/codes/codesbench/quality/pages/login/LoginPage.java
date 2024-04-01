@@ -33,13 +33,8 @@ public class LoginPage extends BasePage
 
     public void logIn()
     {
-        //if we're on MFA authentication page (Enterprise SSO page):
-        if(checkWindowIsPresented(LOGIN_ESSO_PAGE_TITLE))
-        {
-            loginESSOPage().logInESSOWithByPass();
-        }
         //if we're on ordinary authentication page (without MFA with PingID):
-        else if (checkWindowIsPresented(LOGIN_PAGE_TITLE))
+        if (checkWindowIsPresented(LOGIN_PAGE_TITLE))
         {
             setTextOfElement(user().getUsername(), usernameTextbox);
             setTextOfElement(user().getPassword(), passwordTextbox);
@@ -52,7 +47,11 @@ public class LoginPage extends BasePage
             }
             waitForPageLoaded();
         }
-
+        //if we're on MFA authentication page (Enterprise SSO page):
+        else if (checkWindowIsPresented(LOGIN_ESSO_PAGE_TITLE))
+        {
+            loginESSOPage().logInESSOWithByPass();
+        }
     }
 
     public void logInAsSpecificUser(String user)

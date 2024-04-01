@@ -154,6 +154,7 @@ public class TestDriver
         ieOptions = new InternetExplorerOptions();
         ieOptions.attachToEdgeChrome();
         ieOptions.addCommandSwitches("--disable-popup-blocking");
+        ieOptions.setCapability("ignoreProtectedModeSettings", true);
     }
 
     private static void setIeEdgeDriverPath()

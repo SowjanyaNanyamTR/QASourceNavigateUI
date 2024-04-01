@@ -88,7 +88,7 @@ public class SNGeneralSectionPageTests extends SourceNavigateAngularAssertions {
         sourceNavigateAngularTabsPage().click(RENDITION_TAB);
     }
     /**
-     * Access Source Navigate UI app > Click Renditions >Click Sections tab Enable the  Assigned User  and  Assigned Date  columns via the  Columns  UI on the left-side pane for all the tabs
+     * Access Source Navigate UI app > Click ‘Renditions’ >Click Sections tab Enable the  Assigned User  and  Assigned Date  columns via the  Columns  UI on the left-side pane for all the tabs
      *
      * VERIFY:	-	The grid refreshes
      * -	The  Assigned User  and  Assigned Date  columns are displayed in the grid
@@ -99,7 +99,7 @@ public class SNGeneralSectionPageTests extends SourceNavigateAngularAssertions {
      * -	It contains  User  drop-down list,  Assigned to date  field, the  Calendar  button and  Submit  and  Cancel  buttons.
      * -	The User  drop-down list is empty.
      * -	The Assigned to date  field is empty.
-     * -	If click on Calendar  button, todays date is displayed.
+     * -	If click on Calendar  button, today’s date is displayed.
      * Click on the User  drop-down list > Select any user > Type in the correct date mm/dd/yyyy into the Assigned to date  text field > Click on the Calendar  button	The typed date is equal to the date displayed on the Calendar
      * Click on the Calendar  button again to close it > Click Submit  button	-	Assign User UI window is closed.
      * -	The grid is refreshed.

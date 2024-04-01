@@ -1,12 +1,10 @@
 package com.thomsonreuters.codes.codesbench.quality.pages.home;
 
-import com.thomsonreuters.codes.codesbench.quality.pageelements.hierarchy.HierarchyPageElements;
 import com.thomsonreuters.codes.codesbench.quality.pageelements.home.HomePageElements;
 import com.thomsonreuters.codes.codesbench.quality.pages.BasePage;
 import com.thomsonreuters.codes.codesbench.quality.utilities.TestSetupEdge;
 import com.thomsonreuters.codes.codesbench.quality.utilities.annotations.CustomAnnotations;
 import com.thomsonreuters.codes.codesbench.quality.utilities.autoIT.AutoITUtils;
-import com.thomsonreuters.codes.codesbench.quality.utilities.enums.ContentSets;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;

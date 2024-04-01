@@ -648,4 +648,8 @@ public class SourceNavigateAngularAssertions extends SourceNavigateAngularBase {
                 .as(trackingstatus, expected)
                 .isTrue();
     }
+
+    public void assertDisplayOfSectionPropertiesTabs(String tabName){
+        assertThat(sourceNavigateAngularPage().isElementDisplayed(tabName)).isTrue();
+    }
 }

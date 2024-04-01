@@ -43,7 +43,6 @@ public class HierarchyNavigatePage extends BasePage
 	{
 		openPageWithUrl(String.format(urls().getHierarchyPageUrl(), environmentTag, contentSetNumber),
 				HierarchyPageElements.PAGE_TITLE);
-		switchToWindow(HierarchyPageElements.PAGE_TITLE);
 		waitForPageLoaded();
 		return true;
 	}

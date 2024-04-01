@@ -56,6 +56,7 @@ public class SNGeneralRenditionPageTests extends SourceNavigateAngularAssertions
                 !(testInfo.getDisplayName().equals("cancelChangesOfEffectiveDateforRenditionsSectionsDeltas()")) &&
                 !(testInfo.getDisplayName().equals("assignUserandDatetothedocuments()")) &&
                 !(testInfo.getDisplayName().equals("verifyCancelDifficultyLevel()")) &&
+                !(testInfo.getDisplayName().equals("verifyEdit_Instruction_NotesTest()")) &&
                 !(testInfo.getDisplayName().equals("verifyValidateViewValidationForWarningFlag()")) &&
                 !(testInfo.getDisplayName().equals("verifyValidateViewValidationForErrorFlag()")) &&
                 !(testInfo.getDisplayName().equals("verifyValidateViewValidationCiteLocationMultipleMatches()")) &&
@@ -1829,7 +1830,6 @@ public class SNGeneralRenditionPageTests extends SourceNavigateAngularAssertions
         sourceNavigateAngularPage().waitForElementExists(format(TOTAL_RENDITIONS_NUMBER, "1"));
 
         //Lock the rendition from UI
-        sourceNavigateAngularPage().click(SourceNavigateAngularPageElements.FIRST_RENDITION_ROW);
         sourceNavigateAngularPage().rightClickRenditions();
         sourceNavigateAngularPage().clickContextSubMenuItem(EDIT, RENDITION);
         sourceNavigateAngularPage().switchToWindow(EditorPageElements.PAGE_TITLE);
@@ -2859,7 +2859,7 @@ public class SNGeneralRenditionPageTests extends SourceNavigateAngularAssertions
     }
 
     /**
-     * Verify that "Track  Clean" and the "Track  Released to Westlaw" are populated for the corresponding Sections and Deltas of the PREP Rendition(s)
+     * Verify that “Track  Clean and the Track  Released to Westlaw are populated for the corresponding Sections and Deltas of the PREP Rendition(s)
      */
     @Test
     @EDGE
