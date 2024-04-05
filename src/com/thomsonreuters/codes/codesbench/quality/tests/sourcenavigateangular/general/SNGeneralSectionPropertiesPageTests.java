@@ -13,24 +13,30 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
 
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigateangular.SourceNavigateAngularContextMenuItemsPageElements.SECTION_PROPERTIES;
+import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigateangular.SourceNavigateAngularLeftSidePaneElements.FIND_TEXT_FIELD_PATTERN;
 import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigateangular.SourceNavigateAngularPageElements.*;
 import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigateangular.SourceNavigateAngularTabsPageElements.*;
-import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigateangular.popups.SourceNavigateAngularPopUpPageElements.CLOSE_UI_BUTTON;
-import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigateangular.popups.SourceNavigateAngularPopUpPageElements.HEADER;
+
 import static java.lang.String.format;
 
 public class SNGeneralSectionPropertiesPageTests extends SourceNavigateAngularAssertions {
-    SourceDatapodObject datapodObject;
+    SourceDatapodObject datapodAPVObject;
+    SourceDatapodObject datapodPREPObject;
     Connection connection;
-    String renditionUuid;
+    String renditionAPVUuid;
+    String renditionPREPUuid;
 
     @BeforeEach
     public void mockData(TestInfo testInfo) {
         if (!(testInfo.getDisplayName().equals("verifySectionGroupTabClearFilterTest()"))) {
-            datapodObject = SourceDataMockingNew.Iowa.Small.APV.insert();
-            renditionUuid = datapodObject.getRenditions().get(0).getRenditionUUID();
+            datapodAPVObject = SourceDataMockingNew.Iowa.Small.APV.insert();
+            renditionAPVUuid = datapodAPVObject.getRenditions().get(0).getRenditionUUID();
+            datapodPREPObject = SourceDataMockingNew.Iowa.Small.PREP.insert();
+            renditionPREPUuid = datapodPREPObject.getRenditions().get(0).getRenditionUUID();
             connection = CommonDataMocking.connectToDatabase(environmentTag);
         }
     }
@@ -40,47 +46,46 @@ public class SNGeneralSectionPropertiesPageTests extends SourceNavigateAngularAs
     @LEGAL
     @LOG
     public void verifySectionPropertiesUserInterface() {
+        //Storing APV and PREP Rendition UUIDs
+        String[] renditionUUIDs = {renditionAPVUuid, renditionPREPUuid};
 
-        //Finding the Rendition with Rendition UUID with APV Rendition Status
+        ArrayList<String> tabs = new ArrayList<>(Arrays.asList("Section properties", "Proposed/Approved Tracking Information",
+                "PREP Tracking Information", "System Properties"));
+
+        //Finding the Renditions with Rendition UUID with APV and PREP
         sourceNavigateAngularLeftSidePanePage().clickFindButtonOnLeftPane();
-        sourceNavigateAngularLeftSidePanePage().setFindValue("Rendition UUID", renditionUuid);
-        sourceNavigateAngularLeftSidePanePage().clickFindButton();
-        DateAndTimeUtils.takeNap(DateAndTimeUtils.TEN_SECONDS);
-        sourceNavigateAngularPage().rightClickRenditions();
+        for (String uuid : renditionUUIDs) {
+            sourceNavigateAngularLeftSidePanePage().setFindValue("Rendition UUID", uuid);
+            sourceNavigateAngularLeftSidePanePage().clickFindButton();
+            DateAndTimeUtils.takeNap(DateAndTimeUtils.THREE_SECONDS);
+            sourceNavigateAngularPage().rightClickRenditions();
 
+            //Section tab clicking and selecting first row
+            sourceNavigateAngularTabsPage().click(SECTION_TAB);
+            DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
+            sourceNavigateAngularPage().rightClick((format(SECTION_ROW, 0)));
+            DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
+            sourceNavigateAngularPage().clickContextMenuItem(SECTION_PROPERTIES);
+            DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
 
-        //Section tab clicking and selecting first row
-        sourceNavigateAngularTabsPage().click(SECTION_TAB);
-        sourceNavigateAngularPage().rightClick((format(SECTION_ROW, 0)));
-        sourceNavigateAngularPage().clickContextMenuItem(SECTION_PROPERTIES);
+            //Verifying Display of Header and Buttons
+            assertThatDisplayOfHeadersAndButtons();
+            DateAndTimeUtils.takeNap(DateAndTimeUtils.FOUR_SECONDS);
 
-        //Verifying Display of Header
-        sourceNavigateAngularPage().isElementDisplayed(HEADER);
-        sourceNavigateAngularPage().isElementDisplayed(Cancel_Button);
-        sourceNavigateAngularPage().isElementDisplayed(Submit_Button);
-        String headerText = sourceNavigateAngularDeltaPage().getElementsText(HEADER);
-        System.out.println("Text displayed is" + headerText);
-        sourceNavigateAngularPage().isElementDisplayed(format(CLOSE_UI_BUTTON, headerText));
+            //Verifying Display of 4 tabs
+            for (String tab : tabs)
+                assertThatDisplayOfSectionPropertiesTabs(tab);
 
-        //Verifying Display of 4 tabs
-        sourceNavigateAngularPage().isElementDisplayed(format(ANY_TAB_NAME, "Rendition properties"));
-        sourceNavigateAngularPage().isElementDisplayed(format(ANY_TAB_NAME, "Proposed/Approved Tracking Information"));
-        sourceNavigateAngularPage().isElementDisplayed(format(ANY_TAB_NAME, "PREP Tracking Information"));
-        sourceNavigateAngularPage().isElementDisplayed(format(ANY_TAB_NAME, "System Properties"));
+            //Closing Section Properties Pop Up
+            DateAndTimeUtils.takeNap(DateAndTimeUtils.ONE_SECOND);
+            sourceNavigateAngularPage().clickCancel();
+            DateAndTimeUtils.takeNap(DateAndTimeUtils.ONE_SECOND);
+            sourceNavigateAngularPage().clickConfirm();
 
-//        ArrayList<String> tabs = new ArrayList<>(Arrays.asList("Rendition properties", "Proposed/Approved Tracking Information",
-//                        "PREP Tracking Information", "System Properties"));
-//        for (String tab : tabs)
-//            assertDisplayOfSectionPropertiesTabs(tab);
-
-        //Closing Section Properties Pop Up
-        DateAndTimeUtils.takeNap(DateAndTimeUtils.ONE_SECOND);
-        sourceNavigateAngularPage().clickCancel();
-        DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
-        sourceNavigateAngularPage().clickConfirm();
-
-        //Navigating to Rendition Tab
-        sourceNavigateAngularTabsPage().click(RENDITION_TAB);
-
+            //Navigating to Rendition Tab
+            sourceNavigateAngularTabsPage().click(RENDITION_TAB);
+            sourceNavigateAngularLeftSidePanePage().clear(String.format(FIND_TEXT_FIELD_PATTERN, "Rendition UUID"));
+            DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
+        }
     }
 }
