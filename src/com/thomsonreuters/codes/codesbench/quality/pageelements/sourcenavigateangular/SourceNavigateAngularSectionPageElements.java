@@ -29,6 +29,10 @@ public class SourceNavigateAngularSectionPageElements {
     public static final String PREP_TRACKING_SECOND_HALF = "//div[@class='properties-container mb-3']/div[2]"+SECTION_PROPERTIES_BOX_LABEL;
     public static final String SECTION_PROPERTIES_DIFFICULTY_LEVEL_DROPDOWN="//source-nav-single-select-combobox[@id='difficultyLevels']";
     public static final String DIFFICULTY_LEVEL_DROPDOWN_VALUE="//div[text()='%s']";
+    public static final String SECTION_PROPERTIES_INPUT_FIELDS = "//div[@class='tab-content']//input";
+    public static final String CHECKBOX_INPUT_FIELD = "//bento-checkbox/input[@id='%s']";
+    public static final String PREP_TRACKING_COMBO_BOX = SECTION_PROPERTIES_BOX_LABEL+"/following::bento-combobox";
+    public static final String COMBO_BOX_LIST = "//bento-combobox-list//div[@aria-setsize='3']/div/div[text()='%s']";
 
     @FindBy(how = How.ID, using = "sect-note-text-area")
     public static WebElement sectionLevelinstructions;

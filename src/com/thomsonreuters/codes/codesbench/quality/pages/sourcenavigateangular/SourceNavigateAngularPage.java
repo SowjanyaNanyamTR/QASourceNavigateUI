@@ -26,32 +26,27 @@ import static com.thomsonreuters.codes.codesbench.quality.pageelements.tools.wor
 import static java.lang.String.format;
 
 @Component
-public class SourceNavigateAngularPage extends BasePage
-{
+public class SourceNavigateAngularPage extends BasePage {
     private final WebDriver driver;
 
     @Autowired
-    public SourceNavigateAngularPage(WebDriver driver)
-    {
+    public SourceNavigateAngularPage(WebDriver driver) {
         super(driver);
         this.driver = driver;
     }
 
     @PostConstruct
-    public void init()
-    {
+    public void init() {
         PageFactory.initElements(driver, SourceNavigateAngularPageElements.class);
     }
 
-    public void goToSourcePage()
-    {
+    public void goToSourcePage() {
         openPageWithUrl(format(urls().getSourceAngularPageUrl(), environmentTag),
                 SourceNavigateAngularPageElements.PAGE_TITLE);
         waitForPageLoaded();
     }
 
-    public void loginAsSpecificUser(String specificUserName)
-    {
+    public void loginAsSpecificUser(String specificUserName) {
         //Close the current session
         driver().get("http://uat.magellan3.int.westgroup.com:9248/sourceNavigateUi/logout");
         driver().manage().deleteAllCookies();
@@ -63,68 +58,57 @@ public class SourceNavigateAngularPage extends BasePage
         loginPage().logInAsSpecificUser(specificUserName);
     }
 
-    public int getTotalDocumentsNumber(WebElement totalDocumentsNumber)
-    {
+    public int getTotalDocumentsNumber(WebElement totalDocumentsNumber) {
         return Integer.parseInt(getElementsText(totalDocumentsNumber).replaceAll("[^0-9]", ""));
     }
 
-    public int getNumberOfRowsDisplayedInGrid(String gridContainer)
-    {
+    public int getNumberOfRowsDisplayedInGrid(String gridContainer) {
         return driver.findElements(By.xpath(gridContainer)).size();
     }
 
-    public void clickRefreshTableData()
-    {
+    public void clickRefreshTableData() {
         click(SourceNavigateAngularPageElements.REFRESH_TABLE_DATA);
         waitForPageLoaded();
     }
 
-    public boolean isFilterIconExistsInColumnHeading(String columnName)
-    {
+    public boolean isFilterIconExistsInColumnHeading(String columnName) {
         return doesElementExist(format(FILTER_ICON_ON_COLUMN_PATTERN, columnName));
     }
 
-    public List<String> getCellValue(String gridContainer, String columnCell, String columnName)
-    {
+    public List<String> getCellValue(String gridContainer, String columnCell, String columnName) {
         List<String> columnValuesList = new ArrayList<>();
 
-        for (int i = 0; i < getNumberOfRowsDisplayedInGrid(gridContainer); i++)
-        {
+        for (int i = 0; i < getNumberOfRowsDisplayedInGrid(gridContainer); i++) {
             columnValuesList.add(getElementsText(format(columnCell, i, columnName)));
         }
         return columnValuesList;
     }
 
-    public List<String> getCellValue(int numberOfDocuments, String columnCell, String columnName)
-    {
+    public List<String> getCellValue(int numberOfDocuments, String columnCell, String columnName) {
         List<String> columnValuesList = new ArrayList<>();
 
-        for (int i = 0; i < numberOfDocuments; i++)
-        {
+        for (int i = 0; i < numberOfDocuments; i++) {
             columnValuesList.add(getElementsText(format(columnCell, i, columnName)));
         }
         return columnValuesList;
     }
 
-    public String getActiveViewName(String activeViewName)
-    {
+    public String getActiveViewName(String activeViewName) {
         return getElementsText(activeViewName);
     }
 
-    public void scrollPageHorizontallyShiftEnd(String firstRow)
-    {
+    public void scrollPageHorizontallyShiftEnd(String firstRow) {
         click(firstRow);
 //        new Actions(driver)
         Actions action = new Actions(driver);
-               action.keyDown(Keys.SHIFT)
+        action.keyDown(Keys.SHIFT)
                 .sendKeys(Keys.END)
                 .build()
                 .perform();
         waitForElementGone(LOADING_PLATE);
     }
 
-    public void scrollPageToTopCtrlHome()
-    {
+    public void scrollPageToTopCtrlHome() {
         new Actions(driver)
                 .keyDown(Keys.CONTROL)
                 .sendKeys(Keys.HOME)
@@ -133,17 +117,14 @@ public class SourceNavigateAngularPage extends BasePage
         waitForElementGone(LOADING_PLATE);
     }
 
-    public void openRenditionsContextMenu()
-    {
+    public void openRenditionsContextMenu() {
         click(FIRST_RENDITION_ROW);
         rightClickRenditions();
     }
 
-    public void openRenditionsContextMenu(int numberOfRenditions)
-    {
+    public void openRenditionsContextMenu(int numberOfRenditions) {
         Actions action = new Actions(driver).keyDown(Keys.LEFT_CONTROL);
-        for (int i = 0; i < numberOfRenditions; i++)
-        {
+        for (int i = 0; i < numberOfRenditions; i++) {
             action.click(driver.findElement(By.xpath(format(RENDITION_ROW_PATTERN, i))));
         }
         action.keyUp(Keys.LEFT_CONTROL).build().perform();
@@ -151,41 +132,34 @@ public class SourceNavigateAngularPage extends BasePage
         rightClickRenditions();
     }
 
-    public void rightClickRenditions()
-    {
+    public void rightClickRenditions() {
         rightClick(FIRST_RENDITION_ROW);
         breakOutOfFrame();
     }
 
-    public void clickContextMenuItem(String contextMenuItem)
-    {
+    public void clickContextMenuItem(String contextMenuItem) {
         click(contextMenuItem);
     }
 
-    public void clickContextSubMenuItem(String contextMenuItem, String contextSubMenuItem)
-    {
+    public void clickContextSubMenuItem(String contextMenuItem, String contextSubMenuItem) {
         click(contextMenuItem);
         breakOutOfFrame();
         click(contextSubMenuItem);
     }
 
-    public void clickClearFiltersButton()
-    {
+    public void clickClearFiltersButton() {
         click(CLEAR_FILTERS_RENDITION);
     }
 
-    public void makePause()
-    {
+    public void makePause() {
         new Actions(driver).pause(Duration.ofSeconds(1)).build().perform();
     }
 
-    public String getTotalNumberOfRendtions()
-    {
-         return getElementsText(SourceNavigateAngularPageElements.TOTAL_RENDITIONS_NUMBERS).trim();
+    public String getTotalNumberOfRendtions() {
+        return getElementsText(SourceNavigateAngularPageElements.TOTAL_RENDITIONS_NUMBERS).trim();
     }
 
-    public void selectTwoRenditions(String rendition1,String rendition2)
-    {
+    public void selectTwoRenditions(String rendition1, String rendition2) {
         Actions action = new Actions(driver);
         action.click(getElement(rendition1));
         action.pause(Duration.ofSeconds(1));
@@ -196,19 +170,16 @@ public class SourceNavigateAngularPage extends BasePage
         action.keyUp(Keys.SHIFT).build().perform();
     }
 
-    public void scrollToRight(String offset, String element)
-    {
-        ((JavascriptExecutor) driver).executeScript(String.format("arguments[0].scrollLeft += %s",offset), getElement(element));
+    public void scrollToRight(String offset, String element) {
+        ((JavascriptExecutor) driver).executeScript(String.format("arguments[0].scrollLeft += %s", offset), getElement(element));
     }
 
-    public void openDifficultyLevel() 
-    {
+    public void openDifficultyLevel() {
         rightClickRenditions();
         clickContextSubMenuItem(EDIT, DIFFICULTY_LEVEL);
     }
 
-    public boolean goToWorkflowReportingSystem()
-    {
+    public boolean goToWorkflowReportingSystem() {
         click(WORKFLOW_REPORTING_SYSTEM);
         boolean workflowReportingWindowAppeared = switchToWindow(WorkflowSearchPageElements.WORKFLOW_REPORTING_SYSTEM_PAGE_TITLE);
         maximizeCurrentWindow();
@@ -216,75 +187,61 @@ public class SourceNavigateAngularPage extends BasePage
         return workflowReportingWindowAppeared;
     }
 
-    public List<String> addSelectedRowData(int first, int last , String elementPath)
-    {
-        List <String> highlightedRowText= new ArrayList<>();
-        for(int i = first ; i<= last; i++ )
-        {
-            highlightedRowText.add(getElementsText(driver.findElement(By.xpath(String.format(elementPath,i)))));
+    public List<String> addSelectedRowData(int first, int last, String elementPath) {
+        List<String> highlightedRowText = new ArrayList<>();
+        for (int i = first; i <= last; i++) {
+            highlightedRowText.add(getElementsText(driver.findElement(By.xpath(String.format(elementPath, i)))));
         }
         return highlightedRowText;
     }
 
-    public void clickMultipleRendtions(int first, int last , String pattern)
-    {
+    public void clickMultipleRendtions(int first, int last, String pattern) {
         Actions builder = new Actions(driver).keyDown(Keys.LEFT_CONTROL);
 
-        for (int present = first; present<= last; present++)
-            {
-                builder.click(driver.findElement(By.xpath(format(pattern, present))));
-            }
+        for (int present = first; present <= last; present++) {
+            builder.click(driver.findElement(By.xpath(format(pattern, present))));
+        }
         builder.keyUp(Keys.LEFT_CONTROL).build().perform();
     }
 
-    public void clickClearValidationFlag()
-    {
+    public void clickClearValidationFlag() {
         click(SourceNavigateAngularPageElements.CLEAR_VALIDATION_FLAGS);
     }
 
-    public void clickClearWarningFlag()
-    {
+    public void clickClearWarningFlag() {
         click(SourceNavigateAngularPageElements.CLEAR_WARNING_FLAGS);
     }
 
-    public void clickValidateLinks()
-    {
-       click(SourceNavigateAngularPageElements.VALIDATE_LINKS);
+    public void clickValidateLinks() {
+        click(SourceNavigateAngularPageElements.VALIDATE_LINKS);
     }
 
-    public void clickCancel()
-    {
-       click(SourceNavigateAngularPageElements.Cancel_Button);
+    public void clickCancel() {
+        click(SourceNavigateAngularPageElements.Cancel_Button);
     }
 
-    public void clickConfirm()
-    {
+    public void clickConfirm() {
         click(SourceNavigateAngularPageElements.Confirm_Button);
     }
-    
-    public void openMenu(String element)
-    {
+
+    public void openMenu(String element) {
         sendKeyToElement(element, Keys.ARROW_DOWN);
     }
 
 
-    public void selectTaxType(List <String> taxType)
-    {
-        for(String select : taxType)
-        {
+    public void selectTaxType(List<String> taxType) {
+        for (String select : taxType) {
             click(String.format(SourceNavigateAngularPageElements.ADD_TAX_TYPE, select));
         }
     }
 
-    public void deSelectTaxType(List <String> taxType)
-    {
-        for(String select : taxType)
-        {
+    public void deSelectTaxType(List<String> taxType) {
+        for (String select : taxType) {
             click(String.format(SourceNavigateAngularPageElements.ADD_TAX_TYPE, select));
         }
     }
-    public void openMenuColumnHeaderForTabs(String filterbutton, String columnName)
-    {
+
+    public void openMenuColumnHeaderForTabs(String filterbutton, String columnName) {
         new Actions(driver)
                 .moveToElement(driver.findElement(By.xpath(format(filterbutton, columnName))))
                 .click(driver.findElement(By.xpath(format(filterbutton, columnName))))
@@ -292,16 +249,27 @@ public class SourceNavigateAngularPage extends BasePage
                 .perform();
     }
 
-    public void openFilterTabColumnHeader()
-    {
+    public void openFilterTabColumnHeader() {
         click(COLUMN_MENU_FILTERS);
     }
 
-    public void addSort(String optionToSort, String valueToSort)
-    {
+    public void addSort(String optionToSort, String valueToSort) {
         click(ViewWizardPageElements.addSortButton);
         click(ViewWizardPageElements.filterSelect);
         click(optionToSort);
         selectDropdownOption(ViewWizardPageElements.sortSelect, valueToSort);
     }
+
+    public void scrollToRight(String firstRow)
+    {
+        click(firstRow);
+        Actions action = new Actions(driver);
+        action.keyUp(Keys.SHIFT)
+                .sendKeys(Keys.END)
+                .keyUp(Keys.SHIFT)
+                .build()
+                .perform();
+        waitForElementGone(LOADING_PLATE);
+    }
+
 }
