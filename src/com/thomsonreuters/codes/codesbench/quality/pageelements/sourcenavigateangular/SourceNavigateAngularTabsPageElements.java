@@ -19,6 +19,8 @@ public class SourceNavigateAngularTabsPageElements
     public static final String TAB_XPATH = BENTO_WIZARD_STEPS +
             "//span[contains(@class, 'wizard-title') and contains(text(),' %s ')]/parent::button";
     public static final String SOURCE_TAB_NAME = "(//span[@class='smart-badge-host']/span[text()='Source'])[1]";
-    public static final String LOCK_REPORT_TAB_NAME = "//a[text()='Lock Report']";
+    public static final String LOCK_REPORT_TAB_NAME = "//[text()='Lock Report']";
     public static final String ANY_TAB_NAME = "//a[text()='%s']";
+    public static final String LOCKED_DOCUMENTS_TAB = "(//div[@class='column-flex-container']//a/span[text()='Locked Documents'])[2]";
+    public static final String LOCKED_TAB_TITLE= "//span[contains(text(),'SourceNavigateUi'])";
 }

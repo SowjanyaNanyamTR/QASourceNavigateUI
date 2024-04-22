@@ -88,7 +88,7 @@ public class SourceNavigateAngularContextMenuItemsPageElements
     public static final String ASSIGN_USER_GETDATE = "assignedToDatePicker";
     public static final String ASSIGNED_TO_DATE = "//input[@id='assignedToDatePicker']";
     public static final String CONTEXT_MENU_EFFECTIVE_DATE = "//div[@class='ag-menu-option']/span[contains(text(),'Effective Date')]";
-    public static final String EFFECTIVE_DATE_INPUT = "//input[@id='effectiveDatePicker']";
+    public static final String EFFECTIVE_DATE_INPUT = "//input[@id='effectiveDatePicker' or @id='effectiveDate']";
     public static final String SUBMIT = "//button[text()=' Submit ']";
     public static final String USER_SUBMIT = "//button[text()='Submit']";
     public static final String CANCEL = "//button[text()='Cancel']";
@@ -98,4 +98,8 @@ public class SourceNavigateAngularContextMenuItemsPageElements
     public static final String  RUN_CITE_LOCATE_INTEGRATION_STATUS_TOGGLE_BUTTON = "(//bento-toggle[contains(@role,switch)])[3]";
     public static final String  TOOL_BAR_MORE_OPTION = "//div[@class='dropdown']//button[@class='dropdown-toggle btn-toolbar']";
     public static final String DELTA_PROPERTIES = "//span[text()='Delta Properties']";
+    public static final String ASSIGNED_DATE_PICKER="//input[@id='assignedToDate']";
+    public static final String RENDITION_CONTENT_MENU = "//span[text()='Rendition']";
+
+
 }

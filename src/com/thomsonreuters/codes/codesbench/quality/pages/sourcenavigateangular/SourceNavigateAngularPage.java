@@ -123,6 +123,7 @@ public class SourceNavigateAngularPage extends BasePage
         waitForElementGone(LOADING_PLATE);
     }
 
+
     public void scrollPageToTopCtrlHome()
     {
         new Actions(driver)
@@ -303,5 +304,17 @@ public class SourceNavigateAngularPage extends BasePage
         click(ViewWizardPageElements.filterSelect);
         click(optionToSort);
         selectDropdownOption(ViewWizardPageElements.sortSelect, valueToSort);
+    }
+
+    public void scrollToRight(String firstRow)
+    {
+        click(firstRow);
+        Actions action = new Actions(driver);
+        action.keyUp(Keys.SHIFT)
+                .sendKeys(Keys.END)
+                .keyUp(Keys.SHIFT)
+                .build()
+                .perform();
+        waitForElementGone(LOADING_PLATE);
     }
 }

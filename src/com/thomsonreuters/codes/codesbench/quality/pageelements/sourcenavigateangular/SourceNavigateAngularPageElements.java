@@ -142,4 +142,17 @@ public class SourceNavigateAngularPageElements
     public static final String INDEX_ENTRY_COMPLETED_DATE_COLUMN_HEADER="(//span[text()='Index Entry Completed Date'])[3]";
     public static final String LOCK_COLUMN_HEADER= "(//span[text()='Lock'])[5]";
     public static final String RELOAD_DATA = "(//button[@class='btn btn-outline-secondary btn-sm mr-1' and @ngbtooltip='Reload table data'])[4]";
+    public static final String SECTION_PROPERTIES_BOX_LABEL = "//label[text()='%s']";
+    public static final String SECTION_PROPERTIES_INPUT_FIELD = SECTION_PROPERTIES_BOX_LABEL + "/input";
+    public static final String SYSTEM_PROPERTIES_INPUT_FIELD = "//source-nav-section-properties" + SECTION_PROPERTIES_INPUT_FIELD;
+    public static final String SECTION_PROPERTIES_TEXT_FIELD = SECTION_PROPERTIES_BOX_LABEL + "/following::input[1]";
+    public static final String CALENDAR_OPTION = SECTION_PROPERTIES_BOX_LABEL + "/following::button[@aria-label='Open calendar'][1]";
+    public static final String LABEL_TEXT_FIELD = SECTION_PROPERTIES_BOX_LABEL + "/following::input[1]";
+    public static final String OWNER_DATA = SECTION_PROPERTIES_BOX_LABEL + "/following-sibling::input[1]";
+
+    public static final String PREP_TRACKING_FIRST_HALF = "//div[@class='properties-container mb-3']/div[1]"+SECTION_PROPERTIES_BOX_LABEL;
+    public static final String PREP_TRACKING_SECOND_HALF = "//div[@class='properties-container mb-3']/div[2]"+SECTION_PROPERTIES_BOX_LABEL;
+    public static final String DELTA_PROPERTIES_SUBMIT_BUTTON="//source-nav-delta-properties//div/button[text()=' Submit ']";
+    public static final String DELTA_PROPERTIES_INPUT_FIELD = "//source-nav-delta-properties" + SECTION_PROPERTIES_INPUT_FIELD;
+
 }

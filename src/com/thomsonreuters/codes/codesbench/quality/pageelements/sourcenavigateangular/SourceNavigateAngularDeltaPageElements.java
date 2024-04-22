@@ -23,4 +23,13 @@ public class SourceNavigateAngularDeltaPageElements
     public static final String DELTA_CANCEL_BUTTON = "//button[text()='Cancel']";
     public static final String DELTA_SUBMIT_BUTTON = "//button[contains(text(),' Submit ')]";
     public static final String DELTA_CLOSE_BUTTON = "//button[@class='close-btn']";
+    public static final String DELTA_PROPERTIES_DROPDOWN_ELEMENTS ="//div[contains(@class,'group')]/label[text()='%s']";
+    public static final String DELTA_PROPERTIES_VIEWMODE_ELEMENTS= "//label[text()='%s']//input[@class='form-control']";
+    public static final String ASSIGNED_USER_DROPDOWN="//source-nav-assign-user-selector[@id='assigned-user']";
+    public static final String EFFECTIVE_CALENDER= "//div/input[@id='effectiveDate']/following-sibling::button[@title='Open calendar']";
+    public static final String DELTA_DIFFICULTY_LEVEL_DROPDOWN="//source-nav-single-select-combobox[@id='difficultyLevels']";
+    public static final String ASSIGNED_CALENDER= "//div/input[@id='assignedToDate']/following-sibling::button[@title='Open calendar']";
+    public static final String DELTA_PROPERTIES_DESCRIPTION="//textarea[contains(@class,'instructions-area full-width ng-untouched ng-pristine')]";
+    public static final String DIFFICULTY_LEVEL_DROPDOWN_VALUE="//div[text()='%s']";
+    public static final String DELTA_PROPERTIES_LOCKED_HEADER = "//div[@class='alert bento-alert alert-danger']";
 }
