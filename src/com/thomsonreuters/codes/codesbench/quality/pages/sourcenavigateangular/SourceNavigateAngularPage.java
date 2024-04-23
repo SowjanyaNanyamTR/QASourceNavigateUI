@@ -304,4 +304,16 @@ public class SourceNavigateAngularPage extends BasePage
         click(optionToSort);
         selectDropdownOption(ViewWizardPageElements.sortSelect, valueToSort);
     }
+
+    public void scrollToRight(String firstRow)
+    {
+        click(firstRow);
+        Actions action = new Actions(driver);
+        action.keyUp(Keys.SHIFT)
+                .sendKeys(Keys.END)
+                .keyUp(Keys.SHIFT)
+                .build()
+                .perform();
+        waitForElementGone(LOADING_PLATE);
+    }
 }

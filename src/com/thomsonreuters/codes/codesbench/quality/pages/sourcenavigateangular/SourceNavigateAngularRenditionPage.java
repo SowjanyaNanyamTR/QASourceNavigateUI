@@ -50,4 +50,8 @@ public class SourceNavigateAngularRenditionPage extends BasePage {
         editorTextPage().ctrlAUsingAction();
         editorTextPage().deleteUsingAction();
     }
+
+    public boolean verifyLockIconStateOfRendition() {
+        return (doesElementExist(SourceNavigateAngularRenditionPageElements.lockIcon));
+    }
 }
