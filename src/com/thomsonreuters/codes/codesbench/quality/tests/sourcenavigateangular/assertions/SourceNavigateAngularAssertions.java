@@ -15,6 +15,11 @@ import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenav
 import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigateangular.SourceNavigateAngularLockReportPageElements.FIRST_CONTENT_SET;
 import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigateangular.SourceNavigateAngularLockReportPageElements.FIRST_RENDITION_STATUS;
 import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigateangular.SourceNavigateAngularPageElements.*;
+import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigateangular.SourceNavigateAngularSectionPageElements.*;
+import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigateangular.SourceNavigateAngularSectionPageElements.SECTION_PROPERTIES_BOX_LABEL;
+import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigateangular.SourceNavigateAngularTabsPageElements.ANY_TAB_NAME;
+import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigateangular.popups.SourceNavigateAngularPopUpPageElements.CLOSE_UI_BUTTON;
+import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigateangular.popups.SourceNavigateAngularPopUpPageElements.HEADER;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -737,4 +742,114 @@ public class SourceNavigateAngularAssertions extends SourceNavigateAngularBase {
         }
 
     }
+
+    public void assertThatDisplayOfHeadersAndButtons() {
+        String headerText = sourceNavigateAngularDeltaPage().getElementsText(HEADER);
+        System.out.println("Text displayed is" + headerText);
+
+        assertThat(sourceNavigateAngularPage().isElementDisplayed(HEADER))
+                .as("Header is not displayed")
+                .isTrue();
+        assertThat(sourceNavigateAngularPage().isElementDisplayed(Cancel_Button))
+                .as("Cancel Button is not displayed")
+                .isTrue();
+        assertThat(sourceNavigateAngularPage().isElementDisplayed(Submit_Button))
+                .as("Submit Button is not displayed")
+                .isTrue();
+        assertThat(sourceNavigateAngularPage().isElementDisplayed(format(CLOSE_UI_BUTTON, headerText)))
+                .as("UI Close Button is not displayed")
+                .isTrue();
+    }
+
+    public void assertThatDisplayOfSectionPropertiesTabs(String tabName) {
+        assertThat(sourceNavigateAngularPage().isElementDisplayed(format(ANY_TAB_NAME, tabName)))
+                .as(tabName + " is not displayed")
+                .isTrue();
+    }
+
+    public void assertThatFieldsViewMode(String numberField, String deltaCountField) {
+        assertThat(sourceNavigateAngularPage().getElementsAttribute(format(SECTION_PROPERTIES_INPUT_FIELD, numberField), "readonly"))
+                .as(numberField + " is not read only")
+                .isEqualTo("true");
+        assertThat(sourceNavigateAngularPage().getElementsAttribute(format(SECTION_PROPERTIES_INPUT_FIELD, deltaCountField), "readonly"))
+                .as(deltaCountField + " is not read only")
+                .isEqualTo("true");
+    }
+
+    public void assertThatTextFieldsAndCalendarOptions(String effectiveDateField, String assignedDateField) {
+        assertThat(sourceNavigateAngularPage().getElementsAttribute(format(SECTION_PROPERTIES_TEXT_FIELD, effectiveDateField), "placeholder").equals("mm/dd/yyyy"))
+                .as(effectiveDateField + " Text field is not in dd/mm/yyyy format")
+                .isTrue();
+        assertThat(sourceNavigateAngularPage().getElementsAttribute(format(SECTION_PROPERTIES_TEXT_FIELD, assignedDateField), "placeholder").equals("mm/dd/yyyy"))
+                .as(assignedDateField + " Text field is not in dd/mm/yyyy format")
+                .isTrue();
+        assertThat(sourceNavigateAngularPage().isElementDisplayed(format(CALENDAR_OPTION, effectiveDateField)))
+                .as(effectiveDateField + " calendar option is not displayed")
+                .isTrue();
+        assertThat(sourceNavigateAngularPage().isElementDisplayed(format(CALENDAR_OPTION, assignedDateField)))
+                .as(assignedDateField + " calendar option is not displayed")
+                .isTrue();
+    }
+
+    public void assertThatDisplayOfDropdowns(String dropDown1, String dropDown2) {
+        assertThat(sourceNavigateAngularPage().isElementDisplayed(format(LABEL_TEXT_FIELD, dropDown1)))
+                .as(dropDown1 + " Dropdown is not displayed");
+        assertThat(sourceNavigateAngularPage().isElementDisplayed(format(LABEL_TEXT_FIELD, dropDown2)))
+                .as(dropDown1 + " Dropdown is not displayed");
+    }
+
+    public void assertThatDisplayOfTextArea(String labelName) {
+        assertThat(sourceNavigateAngularPage().isElementDisplayed(format(SECTION_INSTRUCTIONS, labelName)))
+                .as(labelName + " Text box is not displayed")
+                .isTrue();
+    }
+
+    public void assertThatSectionPropertiesSubmitButtonIsDisabled(){
+        assertThat(sourceNavigateAngularPage().getElementsAttribute(Submit_Button, "disabled"))
+                .as("Input filed of Submit button is is not read only")
+                .isEqualTo("true");
+    }
+
+    public void assertThatAllInputFieldsAreReadOnly() {
+        List<WebElement> dateFields = sourceNavigateAngularPage().getElements(SECTION_PROPERTIES_INPUT_FIELDS);
+        for (WebElement dateField : dateFields) {
+
+            boolean disabled = false;
+            boolean readOnly = false;
+            try {
+                if (dateField.getAttribute("disabled").equals("true")) {
+                    disabled = true;
+                }
+            } catch (Exception e) {
+                System.out.println("Element doesn't have disabled attribute");
+            }
+
+            try {
+                if (dateField.getAttribute("readonly").equals("true")) {
+                    readOnly = true;
+                }
+            } catch (Exception e) {
+                System.out.println("Element doesn't have readonly attribute");
+            }
+
+            assertThat(disabled | readOnly)
+                    .as("Field is not in view only mode")
+                    .isTrue();
+        }
+    }
+
+    public void assertThatPREPTrackingInputFieldsAreReadOnly(){
+        assertThatAllInputFieldsAreReadOnly();
+    }
+
+    public void assertThatInputFieldsViewMode(String field) {
+        assertThat(sourceNavigateAngularPage().getElementsAttribute(format(SYSTEM_PROPERTIES_INPUT_FIELD, field), "readonly"))
+                .as("Input filed of '" + field + "' is not read only")
+                .isEqualTo("true");
+    }
+
+    public void assertThatProposedApprovedTrackingInformationInputFieldsAreReadOnly(){
+        assertThatAllInputFieldsAreReadOnly();
+    }
+
 }
