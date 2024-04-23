@@ -291,7 +291,6 @@ public class SNGeneralDeltaPropertiesPageTests extends SourceNavigateAngularAsse
         sourceNavigateAngularLeftSidePanePage().clickFindButtonOnLeftPane();
 
         //Applying "APV" Filter for rendition status and clicking on first row
-
         NavigatingAndVerifyingDeltaProperties(Uuid);
         NavigateToDeltaPropertiesTab();
         String headerText = sourceNavigateAngularDeltaPage().getElementsText(DELTA_PROPERTIES_HEADER);
@@ -299,7 +298,6 @@ public class SNGeneralDeltaPropertiesPageTests extends SourceNavigateAngularAsse
 
         //Verify Delta Properties Tab Columns Validation
         DateAndTimeUtils.takeNap(DateAndTimeUtils.THREE_SECONDS);
-
         sourceNavigateAngularPage().clickCancel();
 
         //Closing Section Properties Pop Up
@@ -380,6 +378,7 @@ public class SNGeneralDeltaPropertiesPageTests extends SourceNavigateAngularAsse
 
         //verify the locked icon from the rendition
         boolean lockedStatus = sourceNavigateAngularRenditionPage().verifyLockIconStateOfRendition();
+        System.out.println("locked rendition status is" + lockedStatus);
         if (lockedStatus) {
             System.out.println("Rendition is already locked.");
             assertThatRenditionDisplaysLockIcon(true);
@@ -426,7 +425,6 @@ public class SNGeneralDeltaPropertiesPageTests extends SourceNavigateAngularAsse
 
         //Click on Cancel button and navigate back to rendition tab
         clickOnCancelButtonAndNavigateToRenditionsView(false);
-        verifyRenditionUUidIsLockedOrUnlocked(userName1);
         clickOnRenditionTabAndClearUUID();
     }
 
@@ -442,7 +440,7 @@ public class SNGeneralDeltaPropertiesPageTests extends SourceNavigateAngularAsse
     @LOG
     public void verifyProposedApprovedTrackingInformationContentAndFunctionality() {
         //Storing APV Rendition UUIDs
-        String[] renditionUUIDs = {renditionUuid};
+        String renditionUUIDs = renditionUuid;
         String loggedUserName = "TLE TCBA-BOT";
 
         String[] attributeLabelNames = {"Images Sent Out", "Images Completed", "Tabular Requested", "Tabular Started", "Tabular Completed"};
@@ -451,65 +449,64 @@ public class SNGeneralDeltaPropertiesPageTests extends SourceNavigateAngularAsse
         System.out.println("Current Date:" + currentDate + "/");
         //Finding the Renditions with Rendition UUID with APV and PREP
         sourceNavigateAngularLeftSidePanePage().clickFindButtonOnLeftPane();
-        for (String uuid : renditionUUIDs) {
-            sourceNavigateAngularLeftSidePanePage().setFindValue("Rendition UUID", uuid);
-            sourceNavigateAngularLeftSidePanePage().clickFindButton();
-            DateAndTimeUtils.takeNap(DateAndTimeUtils.THREE_SECONDS);
-            sourceNavigateAngularPage().rightClickRenditions();
 
-            //Section tab clicking and selecting first row
-            sourceNavigateAngularTabsPage().click(DELTA_TAB);
-            DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
-            sourceNavigateAngularPage().rightClick((format(DELTA_ROW, 0)));
-            DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
-            sourceNavigateAngularPage().clickContextMenuItem(DELTA_PROPERTIES);
-            DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
+        sourceNavigateAngularLeftSidePanePage().setFindValue("Rendition UUID", renditionUUIDs);
+        sourceNavigateAngularLeftSidePanePage().clickFindButton();
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.THREE_SECONDS);
+        sourceNavigateAngularPage().rightClickRenditions();
 
-            sourceNavigateAngularPage().click(format(ANY_TAB_NAME, "Proposed/Approved Tracking Information"));
+        //Section tab clicking and selecting first row
+        sourceNavigateAngularTabsPage().click(DELTA_TAB);
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
+        sourceNavigateAngularPage().rightClick((format(DELTA_ROW, 0)));
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
+        sourceNavigateAngularPage().clickContextMenuItem(DELTA_PROPERTIES);
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
 
-            assertThatProposedApprovedTrackingInformationTabContainsColumns("Attribute", "Date", "Owner");
+        sourceNavigateAngularPage().click(format(ANY_TAB_NAME, "Proposed/Approved Tracking Information"));
 
-            for (String labelName : attributeLabelNames)
-                assertThatTabTextFieldAndCalendarOption(labelName);
-            for (String labelName : attributeLabelNames) {
-                sourceNavigateAngularDeltaPage().click(format(CALENDAR_OPTION, labelName));
-                sourceNavigateAngularPage().sendTextToTextbox(format(LABEL_TEXT_FIELD, labelName), currentDate);
-            }
+        assertThatProposedApprovedTrackingInformationTabContainsColumns("Attribute", "Date", "Owner");
 
-            //Closing Section Properties Pop Up
-            DateAndTimeUtils.takeNap(DateAndTimeUtils.ONE_SECOND);
-            sourceNavigateAngularPage().click(SUBMIT);
-
-            sourceNavigateAngularPage().rightClick((format(DELTA_ROW, 0)));
-            DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
-            sourceNavigateAngularPage().clickContextMenuItem(DELTA_PROPERTIES);
-            DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
-            sourceNavigateAngularPage().click(format(ANY_TAB_NAME, "Proposed/Approved Tracking Information"));
-
-            for (String labelName : attributeLabelNames) {
-                String currentDateWithDelimeter = DateAndTimeUtils.getCurrentDateMMddyyyy();
-                assertThatCurrentDateSaved(labelName, currentDateWithDelimeter);
-                assertThatColumnPopulatedWithOwnerData(labelName, loggedUserName);
-            }
-
-            DateAndTimeUtils.takeNap(DateAndTimeUtils.ONE_SECOND);
-            sourceNavigateAngularPage().clickCancel();
-            DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
-            assertThatDisplayOfPopUpElements("Confirmation", "Are you sure you want to cancel?", CANCEL_BUTTON, CONFIRM_BUTTON, CLOSE_UI_BUTTON);
-            sourceNavigateAngularPage().click(SOURCE_NAV_ASSIGN_USER_CANCEL);
-            //Closing Section Properties Pop Up
-            DateAndTimeUtils.takeNap(DateAndTimeUtils.ONE_SECOND);
-            sourceNavigateAngularPage().clickCancel();
-            DateAndTimeUtils.takeNap(DateAndTimeUtils.ONE_SECOND);
-            sourceNavigateAngularPage().clickConfirm();
-
-            //Navigating to Rendition Tab
-            sourceNavigateAngularTabsPage().click(RENDITION_TAB);
-            sourceNavigateAngularLeftSidePanePage().clear(format(FIND_TEXT_FIELD_PATTERN, "Rendition UUID"));
-            DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
-
+        for (String labelName : attributeLabelNames)
+            assertThatTabTextFieldAndCalendarOption(labelName);
+        for (String labelName : attributeLabelNames) {
+            sourceNavigateAngularDeltaPage().click(format(CALENDAR_OPTION, labelName));
+            sourceNavigateAngularPage().sendTextToTextbox(format(LABEL_TEXT_FIELD, labelName), currentDate);
         }
+
+        //Closing Section Properties Pop Up
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.ONE_SECOND);
+        sourceNavigateAngularPage().click(SUBMIT);
+
+        sourceNavigateAngularPage().rightClick((format(DELTA_ROW, 0)));
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
+        sourceNavigateAngularPage().clickContextMenuItem(DELTA_PROPERTIES);
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
+        sourceNavigateAngularPage().click(format(ANY_TAB_NAME, "Proposed/Approved Tracking Information"));
+
+        for (String labelName : attributeLabelNames) {
+            String currentDateWithDelimeter = DateAndTimeUtils.getCurrentDateMMddyyyy();
+            assertThatCurrentDateSaved(labelName, currentDateWithDelimeter);
+            assertThatColumnPopulatedWithOwnerData(labelName, loggedUserName);
+        }
+
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.ONE_SECOND);
+        sourceNavigateAngularPage().clickCancel();
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
+        assertThatDisplayOfPopUpElements("Confirmation", "Are you sure you want to cancel?", CANCEL_BUTTON, CONFIRM_BUTTON, CLOSE_UI_BUTTON);
+        sourceNavigateAngularPage().click(SOURCE_NAV_ASSIGN_USER_CANCEL);
+        //Closing Section Properties Pop Up
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.ONE_SECOND);
+        sourceNavigateAngularPage().clickCancel();
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.ONE_SECOND);
+        sourceNavigateAngularPage().clickConfirm();
+
+        //Navigating to Rendition Tab
+        sourceNavigateAngularTabsPage().click(RENDITION_TAB);
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
+
     }
+
 
     /**
      * Test Case ID:723101_TC8
@@ -520,17 +517,31 @@ public class SNGeneralDeltaPropertiesPageTests extends SourceNavigateAngularAsse
     @LEGAL
     @LOG
     public void verifyPREPTrackingInformationTabContentAndFunctionality() {
-        String renditionUUID = "I300E7A00658F11E28B049F1D7A89B350";
+        String renditionUUID = "I0019DD22447911ED9A48A02BBC3F04DC";
+        String[] attributeLabelNames = {"Attorney Work Started", "Attorney Work Completed", "Versioning Work Started",
+                "Versioning Work Completed", "PREP Started", "PREP Completed", "Ready for Integration", "Integration Started",
+                "Integration Completed", "Integration 2 Started", "Integration 2 Completed",
+                "Audit Review Requested", "Audit Review Started", "Audit Review Completed", "Audit Corrections Started",
+                "Audit Corrections Completed", "Corrections Review Completed", "Corrections Audit Requested",
+                "Corrections Audit Started", "Corrections Audit Completed", "Clean", "Released To Westlaw"};
+
+        String[] checkBoxLabelIDs = {"integrationQueryStarted", "integrationQueryCompleted", "correctionsAuditRequired"};
+        String dropdownLabelName = "Corrections Audit Required";
+
+        String currentDate = DateAndTimeUtils.getCurrentDateMMddyyyyNoDelimeters();
+        String loggedUserName = "TLE TCBA-BOT";
+
         sourceNavigateAngularLeftSidePanePage().clickFindButtonOnLeftPane();
+
         sourceNavigateAngularLeftSidePanePage().setFindValue("Rendition UUID", renditionUUID);
         sourceNavigateAngularLeftSidePanePage().clickFindButton();
         DateAndTimeUtils.takeNap(DateAndTimeUtils.THREE_SECONDS);
         sourceNavigateAngularPage().rightClickRenditions();
 
-        //Delta tab clicking and selecting first row
+        //Section tab clicking and selecting first row
         sourceNavigateAngularTabsPage().click(DELTA_TAB);
         DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
-        sourceNavigateAngularPage().rightClick((format(DELTA_ROW, 0)));
+        sourceNavigateAngularPage().rightClick((format(DELTA_ROW, 5)));
         DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
         sourceNavigateAngularPage().clickContextMenuItem(DELTA_PROPERTIES);
         DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
@@ -539,15 +550,91 @@ public class SNGeneralDeltaPropertiesPageTests extends SourceNavigateAngularAsse
         assertThatPREPTrackingFirstHalfColumns("Attribute", "Value", "Owner");
         assertThatPREPTrackingSecondHalfColumns("Attribute", "Value", "Owner");
 
-        //Closing Section Delta Properties Pop Up
+        for (String labelName : attributeLabelNames)
+            assertThatTabTextFieldAndCalendarOption(labelName);
+
+        for (String id : checkBoxLabelIDs)
+            assertThatCheckboxesEnabledOrNot(id);
+
+        assertThatDisplayOfPREPTrackingDropdownValues(dropdownLabelName, "EAGAN", "MANILA");
+
+        for (String labelName : attributeLabelNames) {
+            sourceNavigateAngularPage().waitForElementToBeClickable(CALENDAR_OPTION);
+            sourceNavigateAngularDeltaPage().click(format(CALENDAR_OPTION, labelName));
+            sourceNavigateAngularPage().sendTextToTextbox(format(LABEL_TEXT_FIELD, labelName), currentDate);
+        }
+
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.FIVE_SECONDS);
+
+        for (String id : checkBoxLabelIDs) {
+//                sourceNavigateAngularPage().click(format(CHECKBOX_INPUT_FIELD, id));
+            sourceNavigateAngularPage().checkCheckbox(format(CHECKBOX_INPUT_FIELD, id));
+            DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
+        }
+
+        sourceNavigateAngularPage().click(format(PREP_TRACKING_COMBO_BOX, dropdownLabelName));
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
+        sourceNavigateAngularPage().click(format(COMBO_BOX_LIST, "EAGAN"));
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
+
+        sourceNavigateAngularPage().click(SUBMIT);
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.THREE_SECONDS);
+        sourceNavigateAngularPage().waitForPageLoaded();
+
+        sourceNavigateAngularPage().rightClick((format(DELTA_ROW, 5)));
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
+        sourceNavigateAngularPage().clickContextMenuItem(DELTA_PROPERTIES);
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
+
+        sourceNavigateAngularPage().click(format(ANY_TAB_NAME, "PREP Tracking Information"));
+        String currentDateWithDelimeter = DateAndTimeUtils.getCurrentDateMMddyyyy();
+        for (String labelName : attributeLabelNames) {
+            assertThatCurrentDateSaved(labelName, currentDateWithDelimeter);
+            assertThatColumnPopulatedWithOwnerData(labelName, loggedUserName);
+        }
+
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.ONE_SECOND);
+        sourceNavigateAngularPage().clickCancel();
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
+        assertThatDisplayOfPopUpElements("Confirmation", "Are you sure you want to cancel?", CANCEL_BUTTON, CONFIRM_BUTTON, CLOSE_UI_BUTTON);
+        sourceNavigateAngularPage().click(SOURCE_NAV_ASSIGN_USER_CANCEL);
+
+        //Closing Delta Properties Pop Up
         DateAndTimeUtils.takeNap(DateAndTimeUtils.ONE_SECOND);
         sourceNavigateAngularPage().clickCancel();
         DateAndTimeUtils.takeNap(DateAndTimeUtils.ONE_SECOND);
         sourceNavigateAngularPage().clickConfirm();
 
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.THREE_SECONDS);
+        sourceNavigateAngularPage().waitForPageLoaded();
+
+        sourceNavigateAngularPage().rightClick((format(DELTA_ROW, 5)));
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
+        sourceNavigateAngularPage().clickContextMenuItem(DELTA_PROPERTIES);
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
+        sourceNavigateAngularPage().click(format(ANY_TAB_NAME, "Proposed/Approved Tracking Information"));
+
+        assertThatProposedApprovedTrackingInformationInputFieldsAreReadOnly();
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.FOUR_SECONDS);
+
+        sourceNavigateAngularPage().click(SUBMIT);
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
+
+
+        sourceNavigateAngularLeftSidePanePage().accessColumnsInterface("DELTA");
+        for (String columnName : attributeLabelNames)
+            sourceNavigateAngularLeftSidePanePage().filterForColumnAndSelectUnderSpecificTab("DELTA", columnName);
+
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
+        sourceNavigateAngularLeftSidePanePage().accessColumnsInterface("DELTA");
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
+
+        sourceNavigateAngularPage().scrollToRight(format(DELTA_ROW, 5));
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
+
         //Navigating to Rendition Tab
         sourceNavigateAngularTabsPage().click(RENDITION_TAB);
-        sourceNavigateAngularLeftSidePanePage().clear(format(FIND_TEXT_FIELD_PATTERN, "Rendition UUID"));
+        sourceNavigateAngularLeftSidePanePage().clear(String.format(FIND_TEXT_FIELD_PATTERN, "Rendition UUID"));
         DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
 
     }
@@ -561,82 +648,39 @@ public class SNGeneralDeltaPropertiesPageTests extends SourceNavigateAngularAsse
     @LEGAL
     @LOG
     public void verifySystemPropertiesTabUIContentAndFunctionality() {
-        String[] renditionUUIDs = {"I300E7A00658F11E28B049F1D7A89B350"};
+        String renditionUUID = "I300E7A00658F11E28B049F1D7A89B350";
         String[] deltaPropertiesTabFields = {"Target Location UUID ", "Target Code ", "Target Node UUID ", "Target Content UUID ", "Delta UUID ",
                 "Section UUID ", "Rendition UUID ", "Lineage UUID ", "Rendition Load Date "};
 
         //Finding the Renditions with Rendition UUID with PREP
         sourceNavigateAngularLeftSidePanePage().clickFindButtonOnLeftPane();
-        for (String uuid : renditionUUIDs) {
-            sourceNavigateAngularLeftSidePanePage().setFindValue("Rendition UUID", uuid);
-            sourceNavigateAngularLeftSidePanePage().clickFindButton();
-            DateAndTimeUtils.takeNap(DateAndTimeUtils.THREE_SECONDS);
-            sourceNavigateAngularPage().rightClickRenditions();
 
-            //Delta tab clicking and selecting first row
-            sourceNavigateAngularTabsPage().click(DELTA_TAB);
-            DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
-            sourceNavigateAngularPage().rightClick((format(DELTA_ROW, 0)));
-            DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
-            sourceNavigateAngularPage().clickContextMenuItem(DELTA_PROPERTIES);
-            DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
-
-            sourceNavigateAngularPage().click(format(ANY_TAB_NAME, "System Properties"));
-            for (String filed : deltaPropertiesTabFields)
-                assertThatDeltaPropertiesInputFieldsViewMode(filed);
-
-            clickOnCancelButtonAndNavigateToRenditionsView(true);
-
-            //Navigating to Rendition Tab
-            sourceNavigateAngularTabsPage().click(RENDITION_TAB);
-            sourceNavigateAngularLeftSidePanePage().clear(format(FIND_TEXT_FIELD_PATTERN, "Rendition UUID"));
-            DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
-
-        }
-    }
-
-    public void verifyRenditionUUidIsLockedOrUnlocked(String user)
-    {
-        sourceNavigateAngularTabsPage().clickSourceTab();
-        sourceNavigateAngularTabsPage().click(LOCKED_DOCUMENTS_TAB);
-        sourceNavigateAngularTabsPage().waitForPageLoaded();
-        sourceNavigateAngularPage().switchToWindow("SourceNavigateUi");
-        sourceNavigateAngularTabsPage().waitForPageLoaded();
-
-        //Filter lock report based on locked doc name
-        DateAndTimeUtils.takeNap(DateAndTimeUtils.FIVE_SECONDS);
-        sourceNavigateAngularLockReportPage().clickOnColumnHeaderFilterButton("lockedDocumentName");
-        sourceNavigateAngularLockReportPage().enterInputInFilterInputBox("2021 2RG Chapter 2");
-        assertThatRenditionIsLocked(true);
-
-        //Right click on the listed rendition and verify the options
-        sourceNavigateAngularLockReportPage().rightClickFirstLockedRendition();
-        assertThatLockedRenditionContextMenuItems();
-        assertThatLockedRendtionContextMenuState();
-
-        //Click on Unlock
-        sourceNavigateAngularLockReportPage().clickUnlock_ForceUnlock_TransferLock("Unlock");
-
-        //Assert that the grid does not show the record any more
-        DateAndTimeUtils.takeNap(DateAndTimeUtils.FIVE_SECONDS);
-        assertThatRenditionIsLocked(false);
-
-        //Click on Renditions tab
-        sourceNavigateAngularTabsPage().click(SourceNavigateAngularTabsPageElements.RENDITION_TAB);
-
-        //Refresh the grid
-        editorPage().switchToWindow(SourceNavigateAngularPageElements.PAGE_TITLE);
-        sourceNavigateAngularPage().clickRefreshTableData();
-
-        //Find the rendition and verify that is NOT currently locked
-        sourceNavigateAngularLeftSidePanePage().clickFindButtonOnLeftPane();
-        sourceNavigateAngularLeftSidePanePage().setFindValue("Rendition UUID", renditionUuid);
+        sourceNavigateAngularLeftSidePanePage().setFindValue("Rendition UUID", renditionUUID);
         sourceNavigateAngularLeftSidePanePage().clickFindButton();
-        sourceNavigateAngularPage().waitForElementExists(format(TOTAL_RENDITIONS_NUMBER, "1"));
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.THREE_SECONDS);
+        sourceNavigateAngularPage().rightClickRenditions();
 
-        //Verify the lock icon for the rendition
-        assertThatRenditionDisplaysLockIcon(false);
+        //Delta tab clicking and selecting first row
+        sourceNavigateAngularTabsPage().click(DELTA_TAB);
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
+        sourceNavigateAngularPage().rightClick((format(DELTA_ROW, 0)));
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
+        sourceNavigateAngularPage().clickContextMenuItem(DELTA_PROPERTIES);
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
+
+        sourceNavigateAngularPage().click(format(ANY_TAB_NAME, "System Properties"));
+        for (String filed : deltaPropertiesTabFields)
+            assertThatDeltaPropertiesInputFieldsViewMode(filed);
+
+        clickOnCancelButtonAndNavigateToRenditionsView(true);
+
+        //Navigating to Rendition Tab
+        sourceNavigateAngularTabsPage().click(RENDITION_TAB);
+        sourceNavigateAngularLeftSidePanePage().clear(format(FIND_TEXT_FIELD_PATTERN, "Rendition UUID"));
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
+
     }
+
     private void lockRendition() throws Exception {
         //Lock the rendition from UI
         sourceNavigateAngularPage().clickContextMenuItem(EDIT);

@@ -9,7 +9,7 @@ import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenav
 public class SourceNavigateAngularRenditionPageElements
 {
     //lock icon
-    public static final String lockIcon = "//source-nav-lock-renderer/em[@class='custom-grid-cell-icon bento-icon-lock']";
+    public static final String lockIcon = "//source-nav-lock-renderer/em[contains(@class,'custom-grid-cell-icon bento-icon-lock')]";
     public static final String EDIT_RENDITION_INSTRUCTION_NOTES = "Edit Rendition Instruction Notes";
     public static final String RENDITION_LOCKED_BY ="//p[contains(text(),' This Rendition is currently locked by ')]";
     public static final String VIEW_RENDITION_INSTRUCTION_NOTES = "View Rendition Instruction Notes";

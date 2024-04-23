@@ -6,6 +6,7 @@ import com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigatean
 import com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigateangular.popups.SourceNavigateAngularToastPageElements;
 import com.thomsonreuters.codes.codesbench.quality.tests.sourcenavigateangular.SourceNavigateAngularBase;
 import com.thomsonreuters.codes.codesbench.quality.utilities.dateAndTime.DateAndTimeUtils;
+import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -676,16 +677,67 @@ public class SourceNavigateAngularAssertions extends SourceNavigateAngularBase {
                 .isEqualTo("true");
     }
 
+    public void assertThatDeltaPropertiesInputFieldsViewMode(String field) {
+        assertThat(sourceNavigateAngularPage().getElementsAttribute(format(DELTA_PROPERTIES_INPUT_FIELD, field), "readonly"))
+                .as("Input filed of '" + field + "' is not read only")
+                .isEqualTo("true");
+    }
+
     public void assertThatDeltaPropertiesSubmitButton() {
         assertThat(sourceNavigateAngularPage().getElementsAttribute(DELTA_PROPERTIES_SUBMIT_BUTTON, "disabled"))
                 .as("Input filed of is not read only")
                 .isEqualTo("true");
     }
 
-    public void assertThatDeltaPropertiesInputFieldsViewMode(String field) {
-        assertThat(sourceNavigateAngularPage().getElementsAttribute(format(DELTA_PROPERTIES_INPUT_FIELD, field), "readonly"))
-                .as("Input filed of '" + field + "' is not read only")
-                .isEqualTo("true");
+    public void assertDisplayOfComboListValue(String value) {
+        assertThat(sourceNavigateAngularPage().isElementDisplayed(format(COMBO_BOX_LIST, value)))
+                .as(value + " is not present")
+                .isTrue();
+    }
+    public void assertThatDisplayOfPREPTrackingDropdownValues(String dropDownLabelName, String value1, String value2) {
+        assertThat(sourceNavigateAngularPage().isElementDisplayed(format(PREP_TRACKING_COMBO_BOX, dropDownLabelName)))
+                .as(dropDownLabelName + " Combo box is not displayed")
+                .isTrue();
+        sourceNavigateAngularPage().click(format(PREP_TRACKING_COMBO_BOX, dropDownLabelName));
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.FIVE_SECONDS);
+        assertDisplayOfComboListValue(value1);
+        assertDisplayOfComboListValue(value2);
+    }
+
+    public void assertThatProposedApprovedTrackingInformationInputFieldsAreReadOnly(){
+        assertThatAllInputFieldsAreReadOnly();
+    }
+
+    public void assertThatCheckboxesEnabledOrNot(String id) {
+        assertThat(sourceNavigateAngularPage().getElementsAttribute(format(CHECKBOX_INPUT_FIELD, id), "aria-checked"))
+                .isEqualTo("false");
+    }
+    public void assertThatAllInputFieldsAreReadOnly() {
+        List<WebElement> dateFields = sourceNavigateAngularPage().getElements(DELTA_PROPERTIES_INPUT_FIELD);
+        for (WebElement dateField : dateFields) {
+
+            boolean disabled = false;
+            boolean readOnly = false;
+            try {
+                if (dateField.getAttribute("disabled").equals("true")) {
+                    disabled = true;
+                }
+            } catch (Exception e) {
+                System.out.println("Element doesn't have disabled attribute");
+            }
+
+            try {
+                if (dateField.getAttribute("readonly").equals("true")) {
+                    readOnly = true;
+                }
+            } catch (Exception e) {
+                System.out.println("Element doesn't have readonly attribute");
+            }
+
+            assertThat(disabled | readOnly)
+                    .as("Field is not in view only mode")
+                    .isTrue();
+        }
     }
 
 

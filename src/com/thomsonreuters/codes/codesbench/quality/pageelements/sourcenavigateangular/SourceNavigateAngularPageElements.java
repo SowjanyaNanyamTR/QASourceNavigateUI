@@ -154,5 +154,7 @@ public class SourceNavigateAngularPageElements
     public static final String PREP_TRACKING_SECOND_HALF = "//div[@class='properties-container mb-3']/div[2]"+SECTION_PROPERTIES_BOX_LABEL;
     public static final String DELTA_PROPERTIES_SUBMIT_BUTTON="//source-nav-delta-properties//div/button[text()=' Submit ']";
     public static final String DELTA_PROPERTIES_INPUT_FIELD = "//source-nav-delta-properties" + SECTION_PROPERTIES_INPUT_FIELD;
-
+    public static final String CHECKBOX_INPUT_FIELD = "//bento-checkbox/input[@id='%s']";
+    public static final String PREP_TRACKING_COMBO_BOX = SECTION_PROPERTIES_BOX_LABEL+"/following::bento-combobox";
+    public static final String COMBO_BOX_LIST = "//bento-combobox-list//div[@aria-setsize='3']/div/div[text()='%s']";
 }
