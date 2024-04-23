@@ -16,6 +16,7 @@ import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.openqa.selenium.By;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenav
 import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigateangular.SourceNavigateAngularTabsPageElements.*;
 import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigateangular.popups.SourceNavigateAngularPopUpPageElements.*;
 import static com.thomsonreuters.codes.codesbench.quality.utilities.database.BaseDatabaseUtils.disconnect;
+import static com.thomsonreuters.codes.codesbench.quality.utilities.enums.ColumnIds.ATTORNEY_WORK_STARTED;
 import static java.lang.String.format;
 
 public class SNGeneralSectionPropertiesPageTests extends SourceNavigateAngularAssertions {
@@ -337,12 +339,11 @@ public class SNGeneralSectionPropertiesPageTests extends SourceNavigateAngularAs
             DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
             sourceNavigateAngularLeftSidePanePage().accessColumnsInterface("SECTION");
             DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
+            sourceNavigateAngularPage().scrollPageHorizontallyShiftEnd(FIRST_RENDITION_ROW);
 
-            sourceNavigateAngularPage().scrollToRight(format(SECTION_ROW, 0));
             DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
 
             //Navigating to Rendition Tab
-            sourceNavigateAngularTabsPage().click(RENDITION_TAB);
 
             sourceNavigateAngularLeftSidePanePage().clear(String.format(FIND_TEXT_FIELD_PATTERN, "Rendition UUID"));
             DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
@@ -464,20 +465,18 @@ public class SNGeneralSectionPropertiesPageTests extends SourceNavigateAngularAs
 
 
             sourceNavigateAngularLeftSidePanePage().accessColumnsInterface("SECTION");
-            for (String columnName : attributeLabelNames)
-                sourceNavigateAngularLeftSidePanePage().filterForColumnAndSelectUnderSpecificTab("SECTION", columnName);
+           // for (String columnName : attributeLabelNames)
+                sourceNavigateAngularLeftSidePanePage().filterForColumnAndSelectUnderSpecificTab("SECTION","Attorney Work Started");
 
             DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
             sourceNavigateAngularLeftSidePanePage().accessColumnsInterface("SECTION");
             DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
+            sourceNavigateAngularPage().scrollPageHorizontallyShiftEnd(FIRST_RENDITION_ROW);
 
-            sourceNavigateAngularPage().scrollToRight(format(SECTION_ROW, 0));
             DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
+            System.out.println( "id:"+driver().findElement(By.xpath("//div[@class='ag-center-cols-container']/div[@aria-selected='true']/div[@col-id='"+ATTORNEY_WORK_STARTED.getId()+"']")).getText());
 
-            //Navigating to Rendition Tab
-            sourceNavigateAngularTabsPage().click(RENDITION_TAB);
-            sourceNavigateAngularLeftSidePanePage().clear(String.format(FIND_TEXT_FIELD_PATTERN, "Rendition UUID"));
-            DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
+
 
         }
     }

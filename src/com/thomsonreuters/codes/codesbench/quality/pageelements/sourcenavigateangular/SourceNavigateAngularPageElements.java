@@ -34,6 +34,7 @@ public class SourceNavigateAngularPageElements
     public static final String RENDITIONS_ACTIVE_VIEW_NAME = SOURCE_NAV_RENDITIONS + ACTIVE_VIEW_NAME;
     public static final String COLUMN_CELL_VALUE_OF_RENDITION_ROW_PATTERN = RENDITIONS_GRID_CONTAINER + "[@row-id='%s']" + COLUMN_ID_PATTERN;
     public static final String FIRST_RENDITION_ROW = "(" + SOURCE_NAV_RENDITIONS_AG_GRID + "//div[@row-id='0'])[2]";
+
     public static final String ANY_RENDITION_ROW = "(" + SOURCE_NAV_RENDITIONS_AG_GRID + "//div[@row-id='%s'])[2]";
     public static final String APV_RENDITION_ROW = "(//div[@col-id='renditionStatus' and contains(text(), 'APV')])[%d]";
     public static final String APVDOCUMENT_NUMBER = "(//div[contains(@class, 'selected')]//div[@col-id='docNumber'])[%d]";

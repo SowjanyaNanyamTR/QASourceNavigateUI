@@ -33,6 +33,9 @@ public class SourceNavigateAngularSectionPageElements {
     public static final String CHECKBOX_INPUT_FIELD = "//bento-checkbox/input[@id='%s']";
     public static final String PREP_TRACKING_COMBO_BOX = SECTION_PROPERTIES_BOX_LABEL+"/following::bento-combobox";
     public static final String COMBO_BOX_LIST = "//bento-combobox-list//div[@aria-setsize='3']/div/div[text()='%s']";
+    public static final String SECTION_LABEL="//label[text()='%s']";
+    public static final String RENDITION_SYSTEM_PROPERTIES_INPUT_FIELD = "//source-nav-Rendition-properties" + SECTION_PROPERTIES_INPUT_FIELD;
+
 
     @FindBy(how = How.ID, using = "sect-note-text-area")
     public static WebElement sectionLevelinstructions;
