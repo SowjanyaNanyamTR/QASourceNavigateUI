@@ -8,7 +8,7 @@ public class SourceNavigateAngularTabsPageElements
     public static final String DELTA_GROUP_TAB_NAME = "Delta Group";
     public static final String DELTA_TAB_NAME = "Delta";
 
-    public static final String RENDITION_TAB = "//span[text()=' Rendition ']";
+    public static final String RENDITION_TAB = "//span[text()='Rendition' or text()=' Rendition ']";
     public static final String LINEAGE_TAB = "//span[text()=' Lineage ']";
     public static final String SECTION_GROUP_TAB = "//span[text()=' Section Group ']";
     public static final String SECTION_TAB = "//span[text()=' Section ']";

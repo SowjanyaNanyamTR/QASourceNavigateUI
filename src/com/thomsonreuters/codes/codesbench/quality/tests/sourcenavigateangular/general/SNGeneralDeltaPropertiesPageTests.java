@@ -80,6 +80,7 @@ public class SNGeneralDeltaPropertiesPageTests extends SourceNavigateAngularAsse
         sourceNavigateAngularPage().rightClick((format(DELTA_ROW, 0)));
         //Click on Delta Properties content Menu
         sourceNavigateAngularPage().clickContextMenuItem(DELTA_PROPERTIES);
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.THREE_SECONDS);
     }
 
     /**
@@ -148,7 +149,7 @@ public class SNGeneralDeltaPropertiesPageTests extends SourceNavigateAngularAsse
         return Stream.of(
                 Arguments.of(renditionUuid, Arrays.asList("Action ", "Cite Locate Status ", "Text Merge Status ", "Text Merge Flags ", "Target Section ", "Target Subsection ",
                         "Target Code ")),
-                Arguments.of("II003C1242A5B211EAAB5682C281D3CA2A", Arrays.asList("Action ", "Cite Locate Status ", "Text Merge Status ", "Text Merge Flags ", "Target Section ", "Target Subsection ",
+                Arguments.of("I300E7A00658F11E28B049F1D7A89B350", Arrays.asList("Action ", "Cite Locate Status ", "Text Merge Status ", "Text Merge Flags ", "Target Section ", "Target Subsection ",
                         "Target Code "))
         );
     }
@@ -228,7 +229,7 @@ public class SNGeneralDeltaPropertiesPageTests extends SourceNavigateAngularAsse
         //Select difficult level from dropdown and click Submit
         sourceNavigateAngularDeltaPage().click(DELTA_DIFFICULTY_LEVEL_DROPDOWN);
         sourceNavigateAngularDeltaPage().click(format(DIFFICULTY_LEVEL_DROPDOWN_VALUE, diffLevel1));
-        DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.THREE_SECONDS);
 
         //Select Assigned Date value from calender dropdown
         sourceNavigateAngularDeltaPage().click(ASSIGNED_CALENDER);
@@ -255,6 +256,8 @@ public class SNGeneralDeltaPropertiesPageTests extends SourceNavigateAngularAsse
 
         //Verifying the updated column values
         sourceNavigateAngularPage().scrollToRight((format(DELTA_ROW, 0)));
+
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
         assertThatDeltaPropertiesValuesAsExpected("difficultyLevel", diffLevel1, 0);
         assertThatRenditionAssignedDateAndUser(FIRST_SECTION_ASSIGNED_DATE, FIRST_SECTION_ASSIGNED_USER, userName1);
         assertThatDeltaPropertiesValuesAsExpected("assignedTo", userName1, 0);
@@ -291,7 +294,7 @@ public class SNGeneralDeltaPropertiesPageTests extends SourceNavigateAngularAsse
         DateAndTimeUtils.takeNap(DateAndTimeUtils.THREE_SECONDS);
         sourceNavigateAngularPage().clickCancel();
 
-        //Closing Section Properties Pop Up
+        //Closing Delta Properties Pop Up
         DateAndTimeUtils.takeNap(DateAndTimeUtils.ONE_SECOND);
         assertThatDisplayOfPopUpElements("Confirmation", "Are you sure you want to cancel?", SOURCE_NAV_ASSIGN_USER_CANCEL, CONFIRM_BUTTON, CLOSE_UI_BUTTON);
 
@@ -322,7 +325,7 @@ public class SNGeneralDeltaPropertiesPageTests extends SourceNavigateAngularAsse
         DateAndTimeUtils.takeNap(DateAndTimeUtils.ONE_SECOND);
         assertThatDisplayOfPopUpElements("Confirmation", "Are you sure you want to cancel?", CANCEL_BUTTON, CONFIRM_BUTTON, CLOSE_UI_BUTTON);
         sourceNavigateAngularPage().click(SOURCE_NAV_ASSIGN_USER_CANCEL);
-        DateAndTimeUtils.takeNap(DateAndTimeUtils.ONE_SECOND);
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
 
         sourceNavigateAngularPage().click(format(CLOSE_UI_BUTTON, headerText));
         DateAndTimeUtils.takeNap(DateAndTimeUtils.ONE_SECOND);

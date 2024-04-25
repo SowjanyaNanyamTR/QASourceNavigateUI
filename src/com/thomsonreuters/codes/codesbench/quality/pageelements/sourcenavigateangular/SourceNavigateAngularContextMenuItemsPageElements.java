@@ -32,7 +32,7 @@ public class SourceNavigateAngularContextMenuItemsPageElements
     public static final String RENDITION_BASELINE = "//span[text()='Rendition Baselines']";
 
     // *** Rendition ***
-    public static final String RENDITION = "//span[text()='Rendition']";
+    public static final String RENDITION = "//span[text()='Rendition' or text()=' Rendition ']";
 
     // *** Create Preparation Document ***
     public static final String CREATE_PREPARATION_DOCUMENT = "//span[text()='Create Preparation Document']";
@@ -88,7 +88,7 @@ public class SourceNavigateAngularContextMenuItemsPageElements
     public static final String ASSIGN_USER_GETDATE = "assignedToDatePicker";
     public static final String ASSIGNED_TO_DATE = "//input[@id='assignedToDatePicker']";
     public static final String CONTEXT_MENU_EFFECTIVE_DATE = "//div[@class='ag-menu-option']/span[contains(text(),'Effective Date')]";
-    public static final String EFFECTIVE_DATE_INPUT = "//input[@id='effectiveDatePicker']";
+    public static final String EFFECTIVE_DATE_INPUT = "//input[@id='effectiveDatePicker' or @id='effectiveDate']";
     public static final String SUBMIT = "//button[text()=' Submit ']";
     public static final String USER_SUBMIT = "//button[text()='Submit']";
     public static final String CANCEL = "//button[text()='Cancel']";
