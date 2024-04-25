@@ -235,6 +235,7 @@ public class SNGeneralDeltaPropertiesPageTests extends SourceNavigateAngularAsse
 
         //Select Assigned Date value from calender dropdown
         sourceNavigateAngularDeltaPage().click(ASSIGNED_CALENDER);
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
         sourceNavigateAngularPage().sendTextToTextbox(ASSIGNED_DATE_PICKER, DateAndTimeUtils.getCurrentDateMMddyyyyNoDelimeters());
         DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
 
@@ -251,18 +252,17 @@ public class SNGeneralDeltaPropertiesPageTests extends SourceNavigateAngularAsse
         sourceNavigateAngularLeftSidePanePage().accessColumnsInterface("DELTA");
         sourceNavigateAngularLeftSidePanePage().filterForColumnAndSelectUnderSpecificTab("DELTA", "Assigned User");
         sourceNavigateAngularLeftSidePanePage().filterForColumnAndSelectUnderSpecificTab("DELTA", "Assigned Date");
+        sourceNavigateAngularPage().scrollToRight((format(DELTA_ROW, 0)));
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
+        assertThatRenditionAssignedDateAndUser(FIRST_SECTION_ASSIGNED_DATE, FIRST_SECTION_ASSIGNED_USER, userName1);
+        assertThatDeltaPropertiesValuesAsExpected("assignedTo", userName1, 0);
         sourceNavigateAngularLeftSidePanePage().filterForColumnAndSelectUnderSpecificTab("DELTA", "Difficulty Level");
+        sourceNavigateAngularPage().scrollToRight((format(DELTA_ROW, 0)));
+        DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
+        assertThatDeltaPropertiesValuesAsExpected("difficultyLevel", diffLevel1, 0);
         sourceNavigateAngularLeftSidePanePage().filterForColumnAndSelectUnderSpecificTab("DELTA", "Effective Date");
         sourceNavigateAngularLeftSidePanePage().filterForColumnAndSelectUnderSpecificTab("DELTA", "Delta Instructions ");
         DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
-
-        //Verifying the updated column values
-        sourceNavigateAngularPage().scrollToRight((format(DELTA_ROW, 0)));
-
-        DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
-        assertThatDeltaPropertiesValuesAsExpected("difficultyLevel", diffLevel1, 0);
-        assertThatRenditionAssignedDateAndUser(FIRST_SECTION_ASSIGNED_DATE, FIRST_SECTION_ASSIGNED_USER, userName1);
-        assertThatDeltaPropertiesValuesAsExpected("assignedTo", userName1, 0);
         assertThatDeltaPropertiesValuesAsExpected("instructionNote", description, 0);
         DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
         clickOnRenditionTabAndClearUUID();
@@ -547,7 +547,7 @@ public class SNGeneralDeltaPropertiesPageTests extends SourceNavigateAngularAsse
 
     }
 
-    private void lockRendition() throws Exception {
+    private void lockRendition() {
         //Lock the rendition from UI
         sourceNavigateAngularPage().clickContextMenuItem(EDIT);
         DateAndTimeUtils.takeNap(DateAndTimeUtils.FIVE_SECONDS);
