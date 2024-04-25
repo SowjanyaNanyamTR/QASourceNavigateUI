@@ -99,4 +99,15 @@ public class SourceNavigateAngularContextMenuItemsPageElements
     public static final String  TOOL_BAR_MORE_OPTION = "//div[@class='dropdown']//button[@class='dropdown-toggle btn-toolbar']";
     public static final String DELTA_PROPERTIES = "//span[text()='Delta Properties']";
     public static final String RENDITION_CONTENT_MENU = "//span[text()='Rendition']";
+    public static final String  SECTION_PROPERTIES_TAB="//a[text()='System Properties']";
+    public static final String  CLASS_NUMBER="//label[text()='Class Number ']";
+    public static final String  CLASS_NAME = "//label[text()='Class Name ']";
+    public static final String RENDITION_TAB = "//a[text()='Rendition properties']";
+    public static final String PROPOSED_TAB = "//a[text()='Proposed/Approved Tracking Information']";
+    public static final String PREP_TAB = "//a[text()='PREP Tracking Information']";
+    public static final String SYSTEM_PROPERTIES_TAB = "//a[text()='System Properties']";
+    public static final String APPROVAL_DATE = "//label[text()='Approval Date']";
+    public static final String  CLOSE_ICON =   "//h5/following::button[@aria-label='Close']";
+    public static final String DOCUMENT_TYPE = "//label[text()='Document Type ']";
+    public static final String DOCUMENT_NUMBER =  "//label[text()= 'Document Number ']";
 }

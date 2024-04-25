@@ -4,6 +4,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigateangular.SourceNavigateAngularDeltaPageElements.SECTION_PROPERTIES_INPUT_FIELD;
+import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigateangular.SourceNavigateAngularSectionPageElements.SECTION_PROPERTIES_BOX_LABEL;
+
 public class SourceNavigateAngularPageElements
 {
     // ---------- General Grid Elements ----------
@@ -142,4 +145,7 @@ public class SourceNavigateAngularPageElements
     public static final String INDEX_ENTRY_COMPLETED_DATE_COLUMN_HEADER="(//span[text()='Index Entry Completed Date'])[3]";
     public static final String LOCK_COLUMN_HEADER= "(//span[text()='Lock'])[5]";
     public static final String RELOAD_DATA = "(//button[@class='btn btn-outline-secondary btn-sm mr-1' and @ngbtooltip='Reload table data'])[4]";
+    public static final String RENDITION_SYSTEM_PROPERTIES_INPUT_FIELD = "//source-nav-Rendition-properties" + SECTION_PROPERTIES_INPUT_FIELD;
+    public static final String CALENDAR_OPTION = SECTION_PROPERTIES_BOX_LABEL + "/following::button[@aria-label='Open calendar'][1]";
+
 }

@@ -11,10 +11,12 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigateangular.SourceNavigateAngularContextMenuItemsPageElements.*;
 import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigateangular.SourceNavigateAngularDeltaPageElements.*;
 import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigateangular.SourceNavigateAngularLockReportPageElements.FIRST_CONTENT_SET;
 import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigateangular.SourceNavigateAngularLockReportPageElements.FIRST_RENDITION_STATUS;
 import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigateangular.SourceNavigateAngularPageElements.*;
+import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigateangular.SourceNavigateAngularPageElements.CALENDAR_OPTION;
 import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigateangular.SourceNavigateAngularSectionPageElements.*;
 import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigateangular.SourceNavigateAngularSectionPageElements.SECTION_PROPERTIES_BOX_LABEL;
 import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigateangular.SourceNavigateAngularTabsPageElements.ANY_TAB_NAME;
@@ -852,4 +854,64 @@ public class SourceNavigateAngularAssertions extends SourceNavigateAngularBase {
         assertThatAllInputFieldsAreReadOnly();
     }
 
+    public void assertThatRenditionPropertiesLabels() {
+        assertThat(sourceNavigateAngularPage().doesElementExist(CLASS_NUMBER, 2000))
+                .as("Create Bookmark window doesn't appear")
+                .isTrue();
+        assertThat((sourceNavigateAngularPage().doesElementExist(CLASS_NAME)))
+                .as("Class Name is not displayed")
+                .isTrue();
+        assertThat((sourceNavigateAngularPage().doesElementExist(CANCEL)))
+                .as("Cancel button is not displayed")
+                .isTrue();
+        assertThat((sourceNavigateAngularPage().doesElementExist(RENDITION_TAB)))
+                .as("Rendition properties is not displayed")
+                .isTrue();
+        assertThat((sourceNavigateAngularPage().doesElementExist(PROPOSED_TAB)))
+                .as("Proposed/Approved Tracking Information is not displayed")
+                .isTrue();
+        assertThat((sourceNavigateAngularPage().doesElementExist(PREP_TAB)))
+                .as("PREP Tracking Information is not displayed")
+                .isTrue();
+        assertThat((sourceNavigateAngularPage().doesElementExist(SYSTEM_PROPERTIES_TAB)))
+                .as("System Properties is not displayed")
+                .isTrue();
+        assertThat((sourceNavigateAngularPage().doesElementExist(APPROVAL_DATE)))
+                .as("Date is not displayed")
+                .isTrue();
+        assertThat((sourceNavigateAngularPage().doesElementExist(CLOSE_ICON)))
+                .as("Close button is not displayed")
+                .isTrue();
+        assertThat((sourceNavigateAngularPage().doesElementExist(DOCUMENT_TYPE)))
+                .as("Document Type is not displayed")
+                .isTrue();
+        assertThat((sourceNavigateAngularPage().doesElementExist(DOCUMENT_NUMBER)))
+                .as("Document Number  is not displayed")
+                .isTrue();
+        assertThat((sourceNavigateAngularPage().doesElementExist(Submit_Button)))
+                .as("Submit button is not displayed")
+                .isTrue();
+    }
+
+    public void assertThatRenditionFieldsViewOnlyMode(List<String> labels) {
+        for (String verify : labels) {
+            assertThat(sourceNavigateAngularPage().getElementsAttribute(format(RENDITION_SYSTEM_PROPERTIES_INPUT_FIELD, verify), "readonly"))
+                    .as("Input filed of '" + verify + "' is not read only")
+                    .isEqualTo("true");
+        }
+    }
+
+    public void assertThatRenditionProposedFieldsViewOnlyMode(List<String> labels) {
+        for (String verify : labels) {
+            assertThat(sourceNavigateAngularPage().getElementsAttribute(format("//input[@id='%s']", verify), "readonly"))
+                    .as("Input filed of '" + verify + "' is not read only")
+                    .isEqualTo("true");
+        }
+    }
+
+    public void assertThatRenditionSystemInputFieldsViewMode(String field) {
+        assertThat(sourceNavigateAngularPage().getElementsAttribute(format(RENDITION_SYSTEM_PROPERTIES_INPUT_FIELD, field), "readonly"))
+                .as("Input filed of '" + field + "' is not read only")
+                .isEqualTo("true");
+    }
 }
