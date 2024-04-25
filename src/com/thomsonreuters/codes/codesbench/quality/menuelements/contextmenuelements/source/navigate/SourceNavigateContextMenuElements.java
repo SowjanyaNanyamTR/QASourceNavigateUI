@@ -8,5 +8,5 @@ public class SourceNavigateContextMenuElements
     public static final String VIEW = CONTEXT_MENU + "//a[text()='View']";
     public static final String TAX_TYPE_ADD = CONTEXT_MENU + "//a[text()='Tax Type Add']";
     public static final String RENDITION_BASELINES = CONTEXT_MENU + "//a[text()='Rendition Baselines']";
-    public static final String RENDITION_PROPERTIES = CONTEXT_MENU + "//a[text()='Rendition Properties']";
+    public static final String CONTEXT_MENU_RENDITION_PROPERTIES = CONTEXT_MENU + "//a[text()='Rendition Properties']";
 }

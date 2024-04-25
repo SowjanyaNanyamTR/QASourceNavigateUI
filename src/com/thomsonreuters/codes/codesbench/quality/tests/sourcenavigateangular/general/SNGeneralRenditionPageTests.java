@@ -35,6 +35,7 @@ import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenav
 import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigateangular.SourceNavigateAngularSectionPageElements.FIRST_RENDITION_ROW;
 import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigateangular.SourceNavigateAngularSectionPageElements.*;
 import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigateangular.SourceNavigateAngularTabsPageElements.*;
+import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigateangular.SourceNavigateAngularTabsPageElements.RENDITION_TAB;
 import static com.thomsonreuters.codes.codesbench.quality.pageelements.sourcenavigateangular.popups.SourceNavigateAngularPopUpPageElements.*;
 import static com.thomsonreuters.codes.codesbench.quality.pageelements.tools.workflowreportingsystem.workflowsearch.WorkflowSearchPageElements.firstWorkflowIdXpath;
 import static com.thomsonreuters.codes.codesbench.quality.utilities.database.BaseDatabaseUtils.disconnect;
@@ -619,7 +620,7 @@ public class SNGeneralRenditionPageTests extends SourceNavigateAngularAssertions
         assertThatRenditionIsLocked(false);
 
         //Click on Renditions tab
-        sourceNavigateAngularTabsPage().click(SourceNavigateAngularTabsPageElements.RENDITION_TAB);
+        sourceNavigateAngularTabsPage().click(RENDITION_TAB);
 
         //Refresh the grid
         editorPage().switchToWindow(SourceNavigateAngularPageElements.PAGE_TITLE);
@@ -824,7 +825,7 @@ public class SNGeneralRenditionPageTests extends SourceNavigateAngularAssertions
         assertThatRenditionIsLocked(false);
 
         //Click on Renditions tab
-        sourceNavigateAngularTabsPage().click(SourceNavigateAngularTabsPageElements.RENDITION_TAB);
+        sourceNavigateAngularTabsPage().click(RENDITION_TAB);
 
         //Find a rendition that is NOT currently locked
         sourceNavigateAngularLeftSidePanePage().clickFindButtonOnLeftPane();
@@ -882,7 +883,7 @@ public class SNGeneralRenditionPageTests extends SourceNavigateAngularAssertions
         sourceNavigateAngularLockReportPage().waitForPageLoaded();
 
         //Click on Renditions tab
-        sourceNavigateAngularTabsPage().click(SourceNavigateAngularTabsPageElements.RENDITION_TAB);
+        sourceNavigateAngularTabsPage().click(RENDITION_TAB);
     }
 
     /**
@@ -1180,7 +1181,7 @@ public class SNGeneralRenditionPageTests extends SourceNavigateAngularAssertions
             assertThatSectionDifficultyLevelValuesAsExpected(diffLevel1, 1);
 
             //Go back to Rendition tab and ensure that there is no E2
-            sourceNavigateAngularTabsPage().click(SourceNavigateAngularTabsPageElements.RENDITION_TAB);
+            sourceNavigateAngularTabsPage().click(RENDITION_TAB);
             sourceNavigateAngularTabsPage().waitForPageLoaded();
             sourceNavigateAngularPage().scrollPageHorizontallyShiftEnd(FIRST_RENDITION_ROW);
             assertThatDifficultyLevelSelectedValueinGrid(FIRST_RENDITION_ROW + String.format(COLUMN_ID_PATTERN, "difficultyLevel"), diffLevel1);
@@ -1188,7 +1189,7 @@ public class SNGeneralRenditionPageTests extends SourceNavigateAngularAssertions
         } finally {
             //------------------Clean up ---------------------------------------------------//
             //Reset all the difficulty values back to null
-            sourceNavigateAngularTabsPage().click(SourceNavigateAngularTabsPageElements.RENDITION_TAB);
+            sourceNavigateAngularTabsPage().click(RENDITION_TAB);
             sourceNavigateAngularPage().click(FIRST_RENDITION_ROW);
 
             //Click on Delta tab
@@ -1232,7 +1233,7 @@ public class SNGeneralRenditionPageTests extends SourceNavigateAngularAssertions
 
             //Scenario#2 : Remove set difficulty level for Renditions, Sections, Deltas
             //Right click Edit--> Difficulty Level
-            sourceNavigateAngularTabsPage().click(SourceNavigateAngularTabsPageElements.RENDITION_TAB);
+            sourceNavigateAngularTabsPage().click(RENDITION_TAB);
             DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
             sourceNavigateAngularPage().click(FIRST_RENDITION_ROW);
             sourceNavigateAngularPage().rightClickRenditions();
@@ -1270,7 +1271,7 @@ public class SNGeneralRenditionPageTests extends SourceNavigateAngularAssertions
             assertThatDifficultyLevelSelectedValueinGrid((String.format(DELTA_ROW, "0") + String.format(COLUMN_ID_PATTERN, "difficultyLevel")), defaultDiffLevel);
 
             //Click on Renditions tab for AfterEach to get executed successfully
-            sourceNavigateAngularTabsPage().click(SourceNavigateAngularTabsPageElements.RENDITION_TAB);
+            sourceNavigateAngularTabsPage().click(RENDITION_TAB);
             DateAndTimeUtils.takeNap(DateAndTimeUtils.TWO_SECONDS);
         }
     }
@@ -1306,7 +1307,7 @@ public class SNGeneralRenditionPageTests extends SourceNavigateAngularAssertions
         assertThatRenditionStatusFiltered(renditionStatus);
 
         sourceNavigateAngularLockReportPage().clickClearFiltersButton();
-        sourceNavigateAngularTabsPage().click(SourceNavigateAngularTabsPageElements.RENDITION_TAB);
+        sourceNavigateAngularTabsPage().click(RENDITION_TAB);
 
     }
 
@@ -1367,7 +1368,7 @@ public class SNGeneralRenditionPageTests extends SourceNavigateAngularAssertions
         sourceNavigateAngularPage().scrollPageHorizontallyShiftEnd(format(DELTA_ROW, 0));
         assertThatGeneralEffectiveDate(String.format(FIRST_DELTA_EFFECTIVE_DATE, 1), dateValue);
 
-        sourceNavigateAngularTabsPage().click(SourceNavigateAngularTabsPageElements.RENDITION_TAB);
+        sourceNavigateAngularTabsPage().click(RENDITION_TAB);
     }
 
     /**
@@ -1890,7 +1891,7 @@ public class SNGeneralRenditionPageTests extends SourceNavigateAngularAssertions
         sourceNavigateAngularLockReportPage().waitForPageLoaded();
 */
         //Click on Renditions tab
-        sourceNavigateAngularTabsPage().click(SourceNavigateAngularTabsPageElements.RENDITION_TAB);
+        sourceNavigateAngularTabsPage().click(RENDITION_TAB);
     }
 
     /**
@@ -1934,7 +1935,7 @@ public class SNGeneralRenditionPageTests extends SourceNavigateAngularAssertions
         assertThatVerifyWorkflowType(String.valueOf(firstWorkflowIdXpath), "CwbCiteLocate");
         workflowSearchPage().closeWorkflowSearchPage();
         workflowSearchPage().switchToWindow(PAGE_TITLE);
-        sourceNavigateAngularTabsPage().click(SourceNavigateAngularTabsPageElements.RENDITION_TAB);
+        sourceNavigateAngularTabsPage().click(RENDITION_TAB);
     }
   
      /**
@@ -2065,7 +2066,7 @@ public class SNGeneralRenditionPageTests extends SourceNavigateAngularAssertions
         assertThatElementNotPresent((String.format(DELTA_ROW, "0") + String.format(COLUMN_ID_PATTERN, "difficultyLevel")), diffLevel3);
 
         //Click on Renditions tab for AfterEach to get executed successfully
-        sourceNavigateAngularTabsPage().click(SourceNavigateAngularTabsPageElements.RENDITION_TAB);
+        sourceNavigateAngularTabsPage().click(RENDITION_TAB);
     }
 
     /**
@@ -2206,7 +2207,7 @@ public class SNGeneralRenditionPageTests extends SourceNavigateAngularAssertions
         {
             //------------------Clean up ---------------------------------------------------//
             //Go back to Rendition tab and ensure that there is no E2
-            sourceNavigateAngularTabsPage().click(SourceNavigateAngularTabsPageElements.RENDITION_TAB);
+            sourceNavigateAngularTabsPage().click(RENDITION_TAB);
             sourceNavigateAngularTabsPage().waitForPageLoaded();
             sourceNavigateAngularPage().click(FIRST_RENDITION_ROW);
             sourceNavigateAngularPage().rightClick(FIRST_RENDITION_ROW);
@@ -2279,7 +2280,7 @@ public class SNGeneralRenditionPageTests extends SourceNavigateAngularAssertions
         DateAndTimeUtils.takeNap(DateAndTimeUtils.THREE_SECONDS);
         String message = "Error: Locked by: " + userName1 + " on";
         assertThatMessage(String.format(ERROR_TOAST_MESSAGE, message),message + " " + DateAndTimeUtils.getCurrentDateMMddyyyy());
-        sourceNavigateAngularTabsPage().click(SourceNavigateAngularTabsPageElements.RENDITION_TAB);
+        sourceNavigateAngularTabsPage().click(RENDITION_TAB);
     }
     
     /**
@@ -2389,7 +2390,7 @@ public class SNGeneralRenditionPageTests extends SourceNavigateAngularAssertions
 
         sourceNavigateAngularPage().switchToWindow("SourceNavigateUi");
 
-        sourceNavigateAngularTabsPage().click(SourceNavigateAngularTabsPageElements.RENDITION_TAB);
+        sourceNavigateAngularTabsPage().click(RENDITION_TAB);
     }
     /*
     Access Source Navigate UI app > Click ‘Renditions’ > Select one or more APV renditions with the single Baseline > Right-click on selected rendition(s) > Click Report -> Run Compare and Markup Report	The pop-up message ‘Workflow was started: <Workflow ID hyperlink>’ shows up
@@ -2461,7 +2462,7 @@ public class SNGeneralRenditionPageTests extends SourceNavigateAngularAssertions
 
         sourceNavigateAngularPage().switchToWindow("SourceNavigateUi");
 
-        sourceNavigateAngularTabsPage().click(SourceNavigateAngularTabsPageElements.RENDITION_TAB);
+        sourceNavigateAngularTabsPage().click(RENDITION_TAB);
     }
     /*
     Access Source Navigate UI app > Click ‘Renditions’ > Select one or more locked APV renditions > Right-click on selected rendition(s) > Click Report	The Report -> Run Compare Report and Report -> Run Compare and Markup Report items are disabled and grayed out
@@ -2590,7 +2591,7 @@ public class SNGeneralRenditionPageTests extends SourceNavigateAngularAssertions
 
         sourceNavigateAngularPage().switchToWindow("SourceNavigateUi");
 
-        sourceNavigateAngularTabsPage().click(SourceNavigateAngularTabsPageElements.RENDITION_TAB);
+        sourceNavigateAngularTabsPage().click(RENDITION_TAB);
     }
     /*
     Access Source Navigate UI app > Click ‘Renditions’ > Select one or more APV renditions with the multiple Baselines > Right-click on selected rendition(s) > Click Report -> Run Compare and Markup Report	The confirmation window appears: ‘Rendition <rendition UUID> was created by something other than source input. Do you wish to continue?’
@@ -2681,7 +2682,7 @@ public class SNGeneralRenditionPageTests extends SourceNavigateAngularAssertions
 
         sourceNavigateAngularPage().switchToWindow("SourceNavigateUi");
 
-        sourceNavigateAngularTabsPage().click(SourceNavigateAngularTabsPageElements.RENDITION_TAB);
+        sourceNavigateAngularTabsPage().click(RENDITION_TAB);
     }
     /**
      * View Source Instructions of single PREP Renditions/Sections/Deltas (MANUALTEST)
@@ -2758,7 +2759,7 @@ public class SNGeneralRenditionPageTests extends SourceNavigateAngularAssertions
         sourceNavigateAngularLockReportPage().waitForPageLoaded();*/
 
         //Click on Renditions tab
-        sourceNavigateAngularTabsPage().click(SourceNavigateAngularTabsPageElements.RENDITION_TAB);
+        sourceNavigateAngularTabsPage().click(RENDITION_TAB);
     }
     /**
      * User Story 722876: [HALCYONST-16722] [CMI]Rendition Integration Results User Story 722858: [HALCYONST-16686] [CMI]Delta Report - Integration Results User Story 722368: [HALCYONST-16098] [CMI] Renditions and Delta: Integration Results
@@ -2810,7 +2811,7 @@ public class SNGeneralRenditionPageTests extends SourceNavigateAngularAssertions
 
         //Click on Renditions tab
         sourceNavigateAngularPage().switchToWindow("SourceNavigateUi");
-        sourceNavigateAngularTabsPage().click(SourceNavigateAngularTabsPageElements.RENDITION_TAB);
+        sourceNavigateAngularTabsPage().click(RENDITION_TAB);
     }
     /**
      * User Story 722876: [HALCYONST-16722] [CMI]Rendition Integration Results User Story 722858: [HALCYONST-16686] [CMI]Delta Report - Integration Results User Story 722368: [HALCYONST-16098] [CMI] Renditions and Delta: Integration Results
@@ -2855,7 +2856,7 @@ public class SNGeneralRenditionPageTests extends SourceNavigateAngularAssertions
 
         //Click on Renditions tab
         sourceNavigateAngularPage().switchToWindow("SourceNavigateUi");
-        sourceNavigateAngularTabsPage().click(SourceNavigateAngularTabsPageElements.RENDITION_TAB);
+        sourceNavigateAngularTabsPage().click(RENDITION_TAB);
     }
 
     /**
@@ -3026,7 +3027,7 @@ public class SNGeneralRenditionPageTests extends SourceNavigateAngularAssertions
         sourceNavigateAngularPage().rightClick((format(DELTA_ROW,0)));
         assertTheContextMenuForPrepDocUnderAllTabs(deltaTabValidation);
 
-        sourceNavigateAngularTabsPage().click(SourceNavigateAngularTabsPageElements.RENDITION_TAB);
+        sourceNavigateAngularTabsPage().click(RENDITION_TAB);
     }
 }
 

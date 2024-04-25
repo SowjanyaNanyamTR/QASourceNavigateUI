@@ -54,6 +54,6 @@ public class SourceNavigateContextMenu extends ContextMenu
 
     public void openRenditionProperties()
     {
-        openContextMenu(SourceNavigateContextMenuElements.RENDITION_PROPERTIES);
+        openContextMenu(SourceNavigateContextMenuElements.CONTEXT_MENU_RENDITION_PROPERTIES);
     }
 }
